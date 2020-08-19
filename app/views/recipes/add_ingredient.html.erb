@@ -1,0 +1,3 @@
+<%= f.simple_fields_for :ingredients do |i| %>
+  <%= render "ingredient_fields", f: i, child_index: Time.now.to_i %>
+<% end %>

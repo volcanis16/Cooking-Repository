@@ -1,4 +1,4 @@
 class Unit < ApplicationRecord
-  validates :name, precence: true, uniqueness: true
+  validates :unit, presence: true, uniqueness: true
   has_many :ingredient_lists
 end

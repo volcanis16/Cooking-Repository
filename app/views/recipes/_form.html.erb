@@ -1,22 +1,38 @@
-<%= form_with(model: recipe, local: true) do |form| %>
-  <% if recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-
-      <ul>
-        <% recipe.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+<% child_index = Time.now.to_i %>
+<%= simple_form_for @recipe do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <%= f.input :title %><br /><br />
+    <%= f.input :default_servings %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Ingredient</th>
+        <th>Prep</th>
+        <th>Amount</th>
+        <th>Unit</th>
+        <th>Amount Two</th>
+        <th>Unit Two</th>
+      </tr>
+    </thead>
+    <tbody class='fields'>
+      <%= f.simple_fields_for :ingredients do |i| %>
+        <%= render "ingredient", f: i%>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class='links'>
+    <%= link_to_add_row('Add Ingredient', f, :ingredients, class: 'btn btn-ptimary')%>
+  </div>
+  <%= f.input :description %><br /><br />
+  <%= f.input :notes %><br /><br />
+
+
+  <div class="form-actions">
+    <%= f.submit %>
   </div>
 <% end %>

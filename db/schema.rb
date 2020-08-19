@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_005217) do
+ActiveRecord::Schema.define(version: 2020_08_15_020452) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_08_15_005217) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.text "notes"
+    t.integer "default_servings"
   end
 
   create_table "recipes_tags", id: false, force: :cascade do |t|
