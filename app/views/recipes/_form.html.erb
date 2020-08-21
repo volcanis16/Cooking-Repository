@@ -30,7 +30,11 @@
   </div>
   <%= f.input :description %><br /><br />
   <%= f.input :notes %><br /><br />
+  <%= label_tag(:tags, 'Tags') %>
+  <%= text_field_tag('tags', f.object.tags_full_list) %><br />
 
+  <%= label_tag(:categories, 'Categories') %>
+  <%= text_field_tag('categories', f.object.categories_full_list) %><br />
 
   <div class="form-actions">
     <%= f.submit %>

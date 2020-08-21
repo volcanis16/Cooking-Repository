@@ -24,7 +24,11 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.build_from_form(recipe_params)
+
+    #Split and assign tags and categories
+    @recipe.tags_full_list=(params[:tags])
+    @recipe.categories_full_list=(params[:categories])
 
     respond_to do |format|
       if @recipe.save
@@ -40,8 +44,12 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
+    @recipe = Recipe.update_data(@recipe, recipe_params)
+    #Split and assign tags and categories
+    @recipe.tags_full_list=(params[:tags])
+    @recipe.categories_full_list=(params[:categories])
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -62,6 +70,7 @@ class RecipesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])
@@ -69,9 +78,9 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :notes, 
-          ingredient_attributes: [:id, :name, 
-            ingredient_list_attributes: [:id, :unit, :amount, :ingredient_id, :alt_unit, :alt_amount, :prep, :_destroy, 
+      params.require(:recipe).permit(:title, :description, :notes, :default_servings,
+          ingredients_attributes: [:id, :name, :_destroy, 
+            ingredient_lists_attributes: [:id, :unit_id, :amount, :alt_unit_id, :alt_amount, :prep, :_destroy, 
               ]])
     end
 

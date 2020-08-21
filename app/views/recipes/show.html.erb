@@ -1,9 +1,64 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
-</p>
+<h1>
+  <strong><%= @recipe.title %></strong>
+</h1>
+<div>
+  <p>Ingredients</p>
+  <p><%= @recipe.default_servings %> Servings</p>
+</div>
+<table class="table">
+  <tbody>
+    <% @recipe.ingredient_lists.each do |i_list|%>
+      <tr>
+        <td>
+          <% unless i_list.amount.blank? %>
+            <%= i_list.amount %>
+          <% end %>
+        </td>
+        <td>
+          <% unless i_list.unit_id.blank?%>
+            <%= Unit.find(i_list.unit_id).unit %>
+          <% end %>
+        </td>
+        <td>
+          <% unless i_list.alt_amount.blank? %>
+            <%= " or  #{i_list.alt_amount} #{Unit.find(i_list.alt_unit_id).unit}" %>
+          <% end %>
+        </td>
+        <td>
+          <%= "#{Ingredient.find(i_list.ingredient_id).name} #{i_list.prep}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+ <p><%= @recipe.description %></p>
+</div>
+<div>
+  <p>Notes:</p>
+  <p><%= @recipe.notes %></p>
+</div>
+
+<div>
+  <p>Categories:</p>
+  <% cats = '' %>
+  <% @recipe.categories.each do |c| %>
+    <% cats += "#{c.name.capitalize}, "%>
+  <% end %>
+  <%= cats.gsub!(/,\s$/, '') %>
+</div>
+
+<div>
+  <p>Tags:</p>
+  <% tags = '' %>
+  <% @recipe.tags.each do |t| %>
+    <% tags += "#{t.name.capitalize}, "%>
+  <% end %>
+  <%= tags.gsub!(/,\s$/, '') %>
+</div>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>
