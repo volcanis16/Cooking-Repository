@@ -9,4 +9,7 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields " + args[:class], data: {fields: fields.gsub("\n", "")})
   end
 
+  def recipe_count(input, table)
+    Recipe.joins(table.to_sym).where("#{table}.name" => input[:name]).count
+  end
 end

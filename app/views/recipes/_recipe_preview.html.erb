@@ -1,0 +1,19 @@
+<div>
+  <% @recipe_count.times do |i| %>
+
+  <div>
+    <% recipe = @recipes[i] %>
+    <strong><%= link_to recipe.title.titleize, recipe %></strong>
+    <div>Image Here</div>
+    <div>
+      <p>Categories: 
+      <%= recipe.categories_full_list %></p>
+      <p>Tags: 
+      <%= recipe.tags_full_list %></p>
+    </div>
+    <br />
+    <br />
+  </div>
+
+  <% end %>
+</div>

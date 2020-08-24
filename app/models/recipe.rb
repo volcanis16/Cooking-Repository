@@ -5,8 +5,7 @@ class Recipe < ApplicationRecord
                           default_servings: prm[:default_servings])
 
     #Remove whitespace from beginning and end
-    recipe.name = strip_whitespace(recipe.name)
-    recipe.default_servings = strip_whitespace(recipe.default_servings)
+    recipe.title = strip_whitespace(recipe.title)
 
     #Initialize ingredients and add ingredient_list relations and info
     recipe = initialize_ingredients(recipe, prm)
@@ -36,11 +35,11 @@ class Recipe < ApplicationRecord
   end
 
   def tags_full_list
-    self.tags.all.map { |t| t.name }.join(' ')
+    self.tags.all.map { |t| t.name }.join(', ')
   end
 
   def tags_full_list=(tags)
-    split = tags.split(' ')
+    split = tags.split(', ')
     self.tags.clear
     split.each do |t|
       tag = Tag.where(:name => t).first_or_create
@@ -49,11 +48,11 @@ class Recipe < ApplicationRecord
   end
 
   def categories_full_list
-    self.categories.all.map { |c| c.name }.join(' ')
+    self.categories.all.map { |c| c.name }.join(', ')
   end
 
   def categories_full_list=(categories)
-    split = categories.split(' ')
+    split = categories.split(', ')
     self.categories.clear
     split.each do |c|
       category = Category.where(:name => c).first_or_create
@@ -62,7 +61,7 @@ class Recipe < ApplicationRecord
   end
 
   validates :title, presence: true
-  validates :default_servings, length: {maximum: 2}
+  validates :default_servings, presence: true, length: {maximum: 2}
 
   has_and_belongs_to_many :categories, optional: true
   has_and_belongs_to_many :tags, optional: true

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div><strong>Categories</strong></div>
+
+<div>
+  <ul>
+    <% @categories.each do |c| %>
+      <li>
+        <%= link_to c.name.titleize, c %>
+        <%= " [#{recipe_count(c, "categories")}]"%>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div><strong>Tags</strong></div>
+
+<div>
+  <ul>
+    <% @tags.each do |t| %>
+      <li>
+        <%= link_to t.name.titleize, t %>
+        <%= " [#{recipe_count(t, "tags")}]"%>
+      </li>
+    <% end %>
+  </ul>
+</div>
