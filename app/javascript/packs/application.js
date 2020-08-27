@@ -23,6 +23,24 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+// Add text to search bar
+$(function () {
+  $("a.add_to_search").on('click', function(event) {
+    var textToAdd = $(this).attr("data-text");
+    console.log(textToAdd)
+    var currentText = $("input[data-field='search_field']").val();
+    console.log(currentText)
+    var $searchBar = $("input[data-field='search_field']");
+    if(currentText.slice(-1) != ","){
+      var textCenter = ", ";
+    } else {
+      var textCenter = " ";
+    }
+    $searchBar.val(currentText + textCenter + textToAdd);
+    return event.preventDefault();
+  })
+})
+
 //Add Ingredient
 $(document).on('turbolinks:load', function() {
 
@@ -37,5 +55,4 @@ $(document).on('turbolinks:load', function() {
     return event.preventDefault();
   })
 
-  
 })

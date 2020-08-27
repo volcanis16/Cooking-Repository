@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipes_and_count, only: :index
 
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
   end
 
   # GET /recipes/1
@@ -74,6 +74,11 @@ class RecipesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])
+    end
+
+    def set_recipes_and_count
+      @recipes = Recipe.all
+      @recipe_count = @recipes.count
     end
 
     # Only allow a list of trusted parameters through.

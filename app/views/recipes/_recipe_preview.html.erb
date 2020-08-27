@@ -11,6 +11,10 @@
       <p>Tags: 
       <%= recipe.tags_full_list %></p>
     </div>
+    <div>
+        <%= link_to 'Edit, ', edit_recipe_path(recipe) %>
+        <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </div>
     <br />
     <br />
   </div>

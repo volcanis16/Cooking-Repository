@@ -23,7 +23,7 @@ class Recipe < ApplicationRecord
     prm[:ingredients_attributes].each do |key, value|
       unless value[:_destroy] == '1'
         sleep(0.001)
-        ingredient = Ingredient.where(name: value[:name]).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
+        ingredient = Ingredient.where(name: value[:name].downcase).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
         ingredient.name = strip_whitespace(ingredient.name)
         recipe.ingredients << ingredient
         ingredient_list = recipe.ingredient_lists.last
@@ -39,7 +39,7 @@ class Recipe < ApplicationRecord
   end
 
   def tags_full_list=(tags)
-    split = tags.split(', ')
+    split = tags.downcase.split(', ')
     self.tags.clear
     split.each do |t|
       tag = Tag.where(:name => t).first_or_create
@@ -52,7 +52,7 @@ class Recipe < ApplicationRecord
   end
 
   def categories_full_list=(categories)
-    split = categories.split(', ')
+    split = categories.downcase.split(', ')
     self.categories.clear
     split.each do |c|
       category = Category.where(:name => c).first_or_create
