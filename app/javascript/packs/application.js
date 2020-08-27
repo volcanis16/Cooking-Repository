@@ -23,36 +23,38 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-// Add text to search bar
-$(function () {
-  $("a.add_to_search").on('click', function(event) {
-    var textToAdd = $(this).attr("data-text");
-    console.log(textToAdd)
-    var currentText = $("input[data-field='search_field']").val();
-    console.log(currentText)
-    var $searchBar = $("input[data-field='search_field']");
-    if(currentText.slice(-1) != ","){
-      var textCenter = ", ";
-    } else {
-      var textCenter = " ";
-    }
-    $searchBar.val(currentText + textCenter + textToAdd);
-    return event.preventDefault();
-  })
-})
 
-//Add Ingredient
 $(document).on('turbolinks:load', function() {
 
+//Remove Ingredient
   $('form').on('click', '.remove_record', function(event) {
     $(this).prev('input[type=hidden').val('1');
     $(this).closest('tr').hide();
     return event.preventDefault();
   });
 
+//Add Ingredient
   $('form').on('click', '.add_fields', function(event) {
     $('.fields').append($(this).data('fields'));
     return event.preventDefault();
   })
 
+// Add text to search bar
+  $("a.add_to_search").on('click', function(event) {
+    var textToAdd = $(this).attr("data-text");
+    var currentText = $("input[data-field='search_field']").val();
+    console.log(currentText)
+    var $searchBar = $("input[data-field='search_field']");
+    if(currentText.slice(-1) != ","){
+      if(currentText === "") {
+        var textCenter = "";
+      } else {
+        var textCenter = ", "
+      }
+    } else {
+        var textCenter = " ";
+    }
+    $searchBar.val(currentText + textCenter + textToAdd);
+    return event.preventDefault();
+  })
 })

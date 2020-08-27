@@ -3,6 +3,7 @@
 <h1>
   <strong><%= @recipe.title %></strong>
 </h1>
+<div><%= image_tag @recipe.main_image unless @recipe.main_image.blank? %></div>
 <div>
   <p>Ingredients</p>
   <p><%= @recipe.default_servings %> Servings</p>
