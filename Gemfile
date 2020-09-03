@@ -28,9 +28,9 @@ gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'bootstrap', '~> 4.5.2'
 gem 'bulma-rails', '~> 0.9.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
-gem 'cocoon', '~> 1.2', '>= 1.2.14'
 gem 'jquery-rails'
 
 

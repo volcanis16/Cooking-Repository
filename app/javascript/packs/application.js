@@ -7,13 +7,11 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-
-// added for nested forms
 //= require jquery3
 //= require jquery_ujs
-//= require cocoon
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
-
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -26,35 +24,42 @@ require("channels")
 
 $(document).on('turbolinks:load', function() {
 
-//Remove Ingredient
+  //Remove Ingredient
   $('form').on('click', '.remove_record', function(event) {
     $(this).prev('input[type=hidden').val('1');
     $(this).closest('tr').hide();
     return event.preventDefault();
-  });
+  })
 
-//Add Ingredient
+  //Add Ingredient
   $('form').on('click', '.add_fields', function(event) {
     $('.fields').append($(this).data('fields'));
     return event.preventDefault();
   })
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $('i.arrow').toggleClass('fa-arrow-right');
+    $('i.arrow').toggleClass('fa-arrow-left');
+  });
 
-// Add text to search bar
-  $("a.add_to_search").on('click', function(event) {
-    var textToAdd = $(this).attr("data-text");
-    var currentText = $("input[data-field='search_field']").val();
-    console.log(currentText)
-    var $searchBar = $("input[data-field='search_field']");
-    if(currentText.slice(-1) != ","){
-      if(currentText === "") {
-        var textCenter = "";
+    // Add text to search bar
+  $('a.dropdown-toggle').on('click', function () {
+    $("a.add_to_search").on('click', function(event) {
+      var textToAdd = $(this).attr("data-text");
+      var currentText = $("input[data-field='search_field']").val();
+      var $searchBar = $("input[data-field='search_field']");
+      if(currentText.slice(-1) != ","){
+        if(currentText === "") {
+          var textCenter = "";
+        } else {
+          var textCenter = ", "
+        }
       } else {
-        var textCenter = ", "
+          var textCenter = " ";
       }
-    } else {
-        var textCenter = " ";
-    }
-    $searchBar.val(currentText + textCenter + textToAdd);
-    return event.preventDefault();
+      $searchBar.val(currentText + textCenter + textToAdd);
+      return event.preventDefault();
+    })
+    $("a.dropdown-toggle").closest("a").off('click');
   })
 })

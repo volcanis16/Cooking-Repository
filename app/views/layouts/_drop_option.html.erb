@@ -1,3 +1,3 @@
-<%= link_to "+ ", "#", class: 'add_to_search', data: { text: "#{type}:#{v.name}" } %>
-<%= link_to "- ", "#", class: 'add_to_search', data: { text: "-#{type}:#{v.name}" } %>
-<%= link_to v.name.titleize, v %>
+<%= link_to "+ ", "#", class: 'add_to_search sidebar-link', data: { text: "#{type}:#{v.name}" } %>
+<%= link_to "- ", "#", class: 'add_to_search sidebar-link', data: { text: "-#{type}:#{v.name}" } %>
+<%= link_to v.name.titleize, v, class: 'sidebar-link' %>
