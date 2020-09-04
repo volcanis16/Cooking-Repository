@@ -15,12 +15,14 @@
     <li class="dropdown-list">
       <strong><%= link_to "Categories:", "#categoriesSubmenu", class: "dropdown-toggle", 'aria-expanded': "false", data: { toggle: "collapse" } %></strong>
         <ul class="collapse list_unstyled" id="categoriesSubmenu">
-          <% Category.all.each do |c| %>
-            <li>
-              <%= render "layouts/drop_option", v: c, type: "cat"%>
-              <%= " [#{recipe_count(c, "categories")}]"%>
-            </li>
-          <% end %>
+          <ul class="scroll-menu">
+            <% Category.all.each do |c| %>
+              <li>
+                <%= render "layouts/drop_option", v: c, type: "cat"%>
+                <%= " [#{recipe_count(c, "categories")}]"%>
+              </li>
+            <% end %>
+          </ul>
         </ul>
     </li>
   </ul>
@@ -29,12 +31,14 @@
     <li>
       <strong><%= link_to "Tags:", "#tagsSubmenu", class: "dropdown-toggle", 'aria-expanded': "false", data: { toggle: "collapse" } %></strong>
       <ul class="collapse list_unstyled" id="tagsSubmenu">
-        <% Tag.all.each do |t| %>
-          <li class="dropdown-list">
-            <%= render "layouts/drop_option", v: t, type: "tag"%>
-            <%= " [#{recipe_count(t, "tags")}]"%>
-          </li>
-        <% end %>
+        <ul class="scroll-menu">
+          <% Tag.all.each do |t| %>
+            <li class="dropdown-list">
+              <%= render "layouts/drop_option", v: t, type: "tag"%>
+              <%= " [#{recipe_count(t, "tags")}]"%>
+            </li>
+          <% end %>
+        </ul>
       </ul>
     </li>
   </ul>

@@ -11,6 +11,44 @@
  * It is generally better to create a new file per style scope.
  *
  */
+  $darker: rgb(46, 46, 46);
+  $dark: rgb(55, 55, 55);
+
  @import "reset";
  @import "sidebar";
  @import "bootstrap";
+ @import "recipes";
+ @import "header";
+
+ .main-container {
+  padding: 0;
+  margin-left: 0;
+ }
+
+ .justify-space {
+  justify-content: space-between;
+ }
+
+ .header {
+   font-size: large;
+   font-weight: bold;
+   color: $darker;
+   background-color: rgb(241, 241, 241);
+ }
+
+ .ingredient-column {
+   border-right: 5px solid $dark;
+   padding-left: 30px;
+ }
+
+ .index-link {
+   color: $dark;
+ }
+
+ .body-text {
+   color: $dark;
+ }
+
+ .no-margin {
+   margin: 0;
+ }

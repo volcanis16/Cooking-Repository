@@ -1,3 +1,29 @@
 // Place all the styles related to the Recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.unit {
+  width: 50px;
+  padding-right: 0;
+}
+
+.amount {
+  max-width: 75px;
+  padding-right: 0;
+}
+
+.default-servings {
+  max-width: 50px;
+  margin-left: 5px;
+}
+
+.text-box {
+  width: 75vw;
+  height: 150px;
+}
+
+.alt_unit {
+  width: 100px;
+  padding-right: 0;
+}

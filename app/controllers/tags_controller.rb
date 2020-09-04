@@ -12,7 +12,7 @@ class TagsController < ApplicationController
   private
 
   def set_tag
-    @tag = Tag.find(params[:id])
+    @tag = Tag.friendly.find(params[:id])
     @recipes = Recipe.joins(:tags).where('tags.name' => @tag[:name])
     @recipe_count = @recipes.count
   end

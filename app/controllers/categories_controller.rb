@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_cat
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
     @recipes = Recipe.joins(:categories).where('categories.name' => @category[:name])
     @recipe_count = @recipes.count
   end

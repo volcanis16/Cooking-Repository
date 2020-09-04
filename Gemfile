@@ -32,6 +32,7 @@ gem 'bootstrap', '~> 4.5.2'
 gem 'bulma-rails', '~> 0.9.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
 gem 'jquery-rails'
+gem 'friendly_id', '~> 5.4.0'
 
 
 group :development, :test do

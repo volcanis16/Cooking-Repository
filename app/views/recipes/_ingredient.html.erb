@@ -7,13 +7,13 @@
 
   <%= f.simple_fields_for :ingredient_lists do |i_list| %>
     <td><%= i_list.input :prep, label: false %></td>
-    <td><%= i_list.input :amount, label: false %></td>
+    <td><%= i_list.input :amount, input_html: { class: "amount" }, label: false %></td>
     <td>
       <%= i_list.input :unit_id, label: false do %>
         <%= i_list.select :unit_id, Unit.all.collect { |u| [u.unit, u.id] }, include_blank: true  %>
       <% end %>
     </td>
-    <td><%= i_list.input :alt_amount, label: false %></td>
+    <td><%= i_list.input :alt_amount, input_html: { class: "amount" }, label: false %></td>
     <td>
       <%= i_list.input :alt_unit_id, label: false do %>
         <%= i_list.select :alt_unit_id, Unit.all.collect { |u| [u.unit, u.id] }, include_blank: true %>

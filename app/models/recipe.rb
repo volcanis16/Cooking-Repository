@@ -13,7 +13,8 @@ class Recipe < ApplicationRecord
 
   def self.update_data(recipe, prm)
     recipe.assign_attributes(title: prm[:title], description: prm[:description], notes: prm[:notes], 
-                          default_servings: prm[:default_servings], main_image: prm[:main_image])
+                          default_servings: prm[:default_servings])
+    recipe.assign_attributes(main_image: prm[:main_image]) unless prm[:main_image].blank?
     recipe.title = strip_whitespace(recipe.title)
     recipe.ingredients.clear
     recipe = initialize_ingredients(recipe, prm)
