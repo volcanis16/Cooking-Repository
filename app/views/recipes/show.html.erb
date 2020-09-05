@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
   <div class="row">
-    <div class="col-sm-4 col-xl-3 ingredient-column">
+    <div class="col-sm-4 col-xl-3 ingredient-column order-2 order-sm-1">
       <h1>
         <strong><%= @recipe.title %></strong>
       </h1>
       <div class="justify-space d-flex">
-        <p class="d-inline-flex body-text no-margin">Ingredients:</p>
-        <p class="d-inline-flex body-text no-margin"><%= @recipe.default_servings %> Serving<%= "s" if @recipe.default_servings.to_i > 1 %></p>
+        <p class="d-inline-flex ingredient-servings no-margin">Ingredients:</p>
+        <p class="d-inline-flex ingredient-servings no-margin"><%= @recipe.default_servings %> Serving<%= "s" if @recipe.default_servings.to_i > 1 %></p>
       </div>
 
       <table class="table table-striped table-sm">
@@ -23,15 +23,16 @@
               </td>
 
               <td>
-                <%= "#{Ingredient.find(i_list.ingredient_id).name}" %><%= ", #{i_list.prep}" if i_list.prep %>
+                <% ingredient = Ingredient.find(i_list.ingredient_id).name %>
+                <%= "#{i_list.unit_id.blank? ? ingredient.pluralize : ingredient}" %><%= ", #{i_list.prep}" if i_list.prep %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
-    <div class="col-sm-8">
-      <div><%= image_tag @recipe.main_image unless @recipe.main_image.blank? %></div>
+    <div class="col-sm-8 order-1 order-sm-2">
+      <div class="image"><%= image_tag @recipe.main_image.variant(resize_to_fit: [700, 700]) unless @recipe.main_image.blank? %></div>
       <div>
         <p class="header">Instructions:</p>
         <p class="body-text"><%= @recipe.description %></p>

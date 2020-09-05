@@ -4,7 +4,7 @@
   <div>
     <% recipe = @recipes[i] %>
     <strong><%= link_to recipe.title.titleize, recipe %></strong>
-    <div><%= image_tag recipe.main_image.variant(resize_to_limit: [150, nil]) unless recipe.main_image.blank? %></div>
+    <div><%= image_tag recipe.main_image.variant(resize_and_pad: [150, 150]) unless recipe.main_image.blank? %></div>
     <div>
       <p>Categories: 
       <%= recipe.categories_full_list %></p>

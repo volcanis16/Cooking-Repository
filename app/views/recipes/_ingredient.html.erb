@@ -3,7 +3,12 @@
     <%= f.input_field :_destroy, as: :hidden %>
     <%= link_to 'Delete', '#', class: 'remove_record' %>
   </td>
-  <td><%= f.input :name, label: false %></td>
+  <td>
+    <%= button_tag(:class => "btn btn-sm add-to-tags") do %>
+      <span class="fa fa-hashtag"></span>
+    <% end %>
+  </td>
+  <td><%= f.input :name, label: false, input_html: {class: "ingredient-name"} %></td>
 
   <%= f.simple_fields_for :ingredient_lists do |i_list| %>
     <td><%= i_list.input :prep, label: false %></td>

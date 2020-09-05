@@ -34,15 +34,51 @@ $(document).on('turbolinks:load', function() {
   //Add Ingredient
   $('form').on('click', '.add_fields', function(event) {
     $('.fields').append($(this).data('fields'));
+    $("button.add-to-tags").last().on('click', function(event) {
+      var textToAdd = $(this).closest("tr").find(".ingredient-name").val();
+      var currentText = $("#tags").val();
+      var $tagsBar = $("#tags");
+      if(currentText.slice(-1) != ","){
+        if(currentText === "") {
+          var textCenter = "";
+        } else {
+          var textCenter = ", "
+        }
+      } else {
+          var textCenter = " ";
+      }
+      $tagsBar.val(currentText + textCenter + textToAdd);
+      return event.preventDefault();
+    })
     return event.preventDefault();
   })
+
+  //Add to tags
+  $("button.add-to-tags").on('click', function(event) {
+    var textToAdd = $(this).closest("tr").find(".ingredient-name").val();
+    var currentText = $("#tags").val();
+    var $tagsBar = $("#tags");
+    if(currentText.slice(-1) != ","){
+      if(currentText === "") {
+        var textCenter = "";
+      } else {
+        var textCenter = ", "
+      }
+    } else {
+        var textCenter = " ";
+    }
+    $tagsBar.val(currentText + textCenter + textToAdd);
+    return event.preventDefault();
+  })
+
+  //Collapse Sidebar
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
     $('i.arrow').toggleClass('fa-arrow-right');
     $('i.arrow').toggleClass('fa-arrow-left');
   });
 
-    // Add text to search bar
+  // Add text to search bar
   $('a.dropdown-toggle').on('click', function () {
     $("a.add_to_search").on('click', function(event) {
       var textToAdd = $(this).attr("data-text");

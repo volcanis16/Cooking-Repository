@@ -2,7 +2,8 @@
   <%= simple_form_for @recipe do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
-      <%= f.input :title %><br /><br />
+      <p class="main-header">Title:</p>
+      <%= f.input :title, label: false, input_html: {class: "title-field"} %><br /><br />
       <%= image_tag f.object.main_image unless f.object.main_image.blank? %><br /><br />
       <%= f.input :main_image, label: "Change Image" %>
       <%= f.input :default_servings, label: "Default Servings", collection: 1..99, input_html: { class: "default-servings" } %>
@@ -11,6 +12,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th></th>
           <th></th>
           <th>Ingredient</th>
           <th>Prep</th>
@@ -29,7 +31,7 @@
 
     <div class='links'>
       <%= link_to_add_row('Add Ingredient', f, :ingredients, class: 'btn btn-primary')%>
-    </div><br  /><br  />
+    </div><br  />
     <div class="instructions-box">
       <p class="header">Instructions:</p>
       <%= f.input :description, label: false, input_html: { class: "text-box" } %><br />
@@ -38,12 +40,14 @@
       <p class="header">Notes:</p>
       <%= f.input :notes, label: false, input_html: { class: "text-box" } %><br />
     </div>
-    <%= label_tag(:tags, 'Tags') %>
-    <%= text_field_tag('tags', f.object.tags_full_list) %><br />
-
-    <%= label_tag(:categories, 'Categories') %>
-    <%= text_field_tag('categories', f.object.categories_full_list) %><br />
-
+    <div class="tags">
+      <%= label_tag(:tags, 'Tags') %>
+      <%= text_field_tag('tags', f.object.tags_full_list, class: 'group-field') %>
+    </div><br />
+    <div class="categories">
+      <%= label_tag(:categories, 'Categories') %>
+      <%= text_field_tag('categories', f.object.categories_full_list, class: 'group-field') %>
+    </div><br />
     <div class="form-actions">
       <%= f.submit %>
     </div>

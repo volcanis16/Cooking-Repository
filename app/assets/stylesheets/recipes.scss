@@ -27,3 +27,39 @@
   width: 100px;
   padding-right: 0;
 }
+
+.image {
+  overflow: hidden;
+}
+
+.ingredient-servings {
+  color: $dark;
+}
+
+@media (max-width: 768px) {
+  .ingredient-servings{
+    font-size: small;
+  }
+}
+
+.add-to-tags {
+  background: rgb(209, 209, 209);
+}
+
+.main-header {
+  font-size: xx-large;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $darker;
+  margin: 0;
+}
+
+.title-field {
+  height: 75px;
+  width: 750px;
+  padding: 15px, 0px;
+  font-size: 3em;
+}
+
+.group-field {
+  width: 400px;
+}

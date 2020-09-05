@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_195059) do
+ActiveRecord::Schema.define(version: 2020_09_05_185328) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,11 @@ ActiveRecord::Schema.define(version: 2020_09_04_195059) do
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
+  create_table "categories_groups", id: false, force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "category_id", null: false
+  end
+
   create_table "categories_recipes", id: false, force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "category_id", null: false
@@ -55,6 +60,17 @@ ActiveRecord::Schema.define(version: 2020_09_04_195059) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "groups_tags", id: false, force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "tag_id", null: false
   end
 
   create_table "ingredient_lists", force: :cascade do |t|
