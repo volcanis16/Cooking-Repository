@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   end
 
   def index
-
+    @groups = Group.all
   end
 
   def new
@@ -20,7 +20,10 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(params[:group])
+    @par = group_params
+    @par[:tag_ids].reject!(&:blank?)
+    @par[:category_ids].reject!(&:blank?)
+    @group = Group.new(@par)
 
     respond_to do |format|
       if @group.save
@@ -61,11 +64,11 @@ class GroupsController < ApplicationController
   private
 
   def set_group
-    @group = Group.friendly.find(params:[id])
+    @group = Group.friendly.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def group_params
-    params.require(:group[]).permit(:tags, :categories)
+    params.require(:group).permit(:name, :tag_ids => [], :category_ids => [])
   end
 end

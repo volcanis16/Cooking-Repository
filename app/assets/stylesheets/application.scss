@@ -36,11 +36,6 @@
    background-color: rgb(241, 241, 241);
  }
 
- .ingredient-column {
-   border-right: 5px solid $dark;
-   padding-left: 30px;
- }
-
  .index-link {
    color: $dark;
  }
@@ -51,4 +46,13 @@
 
  .no-margin {
    margin: 0;
+ }
+
+ .checkbox-text {
+   text-justify: center;
+   color: $darker;
+ }
+
+ .checkbox-container {
+   height: 1.75em;
  }

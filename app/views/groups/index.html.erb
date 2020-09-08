@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<div><strong>Groups:</strong></div>
+
+<div class="row">
+  <% @groups.each do |g| %>
+    <div class="col-3">
+      <%= render "layouts/index_list", item: g %>
+    </div>
+  <% end %>
+</div>

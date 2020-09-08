@@ -1,0 +1,37 @@
+<div>
+  <%= simple_form_for @group do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <p class='header'>Name:</p>
+      <%= f.input :name, label: false, input_html: {class: "name-field"} %><br /><br />
+      <div class='row'>
+        <div class="col-12 col-sm-6">
+          <p class='header'>Categories:</p>
+          <div class='row'>
+            <%= f.collection_check_boxes(:category_ids, Category.all.sort_by { |c| c.name }, :id, :name,
+                  {item_wrapper_class: 'col-6 checkbox-container'}) do |b| %>
+              <%= b.label class: 'checkbox-text' do %>
+                <%= b.check_box + " " + b.text.titleize + " "%>
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
+        <div class="col-12 col-sm-6">
+          <p class='header'>Tags:</p>
+          <div class='row'>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all.sort_by { |c| c.name }, :id, :name,
+                  {item_wrapper_class: 'col-6 checkbox-container'}) do |b| %>
+              <%= b.label class: 'checkbox-text' do %>
+                <%= b.check_box + " " + b.text.titleize + " "%>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div><br  />
+    <div class="form-actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
