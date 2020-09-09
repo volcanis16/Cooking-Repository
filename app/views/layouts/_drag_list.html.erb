@@ -1,0 +1,28 @@
+<div class='dragscroll drag-list-container hide-scroll'>
+  <% list = Tag.find_by(name: 'banana').recipes%>
+    <div style="width:<%= (list.length + 1) * 250 %>px">
+      <% list.each do |recipe| %>
+        <div class="recipe-preview">
+          <%= link_to recipe do %>
+            <div class=preview-link>
+              <div class="preview-title"><%= recipe.title.titleize %></div>
+              <div><%= image_tag(recipe.main_image.variant(resize_and_pad: [150, 150]), class: 'image-preview') unless recipe.main_image.blank? %></div>
+            </div>
+          <% end %>
+          <div>
+            <p class='no-margin index-link-preview'>Categories: 
+              <% recipe.categories.limit(5).each do |c| %>
+                <%= link_to "##{c.name.titleize}", c, class: 'index-link-preview' %>
+              <% end %>
+            </p>
+            <p class='no-margin index-link-preview'>Tags: 
+              <% recipe.tags.limit(5).each do |t| %>
+                <%= link_to "##{t.name.titleize}", t, class: 'index-link-preview' %>
+              <% end %>
+          </div>
+          <br />
+          <br />
+        </div>
+      <% end %>
+   </div>
+</div>

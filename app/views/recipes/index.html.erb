@@ -2,7 +2,10 @@
 
 <h1>Recipes</h1>
 
-<div><%= render "recipes/recipe_preview" %></div>
-
-
-<%= link_to 'New Recipe', new_recipe_path %>
+<div>
+  <% list = Category.order(Arel.sql('RANDOM()')).first.recipes.limit(20) %>
+  <%= render "layouts/drag_list", list: list%>
+</div>
+<div>
+  <%= render "layouts/drag_list", list: list%>
+</div>
