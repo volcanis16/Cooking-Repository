@@ -1,3 +1,10 @@
-<div>
+<br  />
+<div class="container">
   <%= render "recipes/recipe_preview"%>
+</div><br />
+
+<div class='paginate-container d-flex'>
+  <div class='center-content'>
+    <%= paginate(@recipes) %>
+  </div>
 </div>

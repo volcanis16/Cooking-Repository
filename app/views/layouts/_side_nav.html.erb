@@ -15,7 +15,8 @@
     <li class="dropdown-list">
       <strong><%= link_to "Categories:", "#categoriesSubmenu", class: "dropdown-toggle", 'aria-expanded': "false", data: { toggle: "collapse" } %></strong>
         <ul class="collapse list_unstyled" id="categoriesSubmenu">
-          <ul class="scroll-menu">
+          <ul class="scroll-menu hide-scroll">
+            <li><%= link_to "Categories Home", categories_path, class: 'sidebar-link' %></li>
             <% Category.all.each do |c| %>
               <li>
                 <%= render "layouts/drop_option", v: c, type: "cat"%>
@@ -28,12 +29,13 @@
   </ul>
 
   <ul class="list_unstyled components">
-    <li>
+    <li class="dropdown-list">
       <strong><%= link_to "Tags:", "#tagsSubmenu", class: "dropdown-toggle", 'aria-expanded': "false", data: { toggle: "collapse" } %></strong>
       <ul class="collapse list_unstyled" id="tagsSubmenu">
-        <ul class="scroll-menu">
+        <ul class="scroll-menu hide-scroll">
+          <li><%= link_to "Tags Home", tags_path, class: 'sidebar-link' %></li>
           <% Tag.all.each do |t| %>
-            <li class="dropdown-list">
+            <li>
               <%= render "layouts/drop_option", v: t, type: "tag"%>
               <%= " [#{recipe_count(t, "tags")}]"%>
             </li>
@@ -42,4 +44,34 @@
       </ul>
     </li>
   </ul>
+  <% unless Group.all.blank? %>
+    <% Group.all.each do |g| %>
+      <ul class="list_unstyled components">
+        <li class="dropdown-list">
+          <strong><%= link_to g.name.titleize, "##{no_space(g.name.downcase)}Submenu", class: "dropdown-toggle", 'aria-expanded': "false", data: { toggle: "collapse" } %></strong>
+            <ul class="collapse list_unstyled" id=<%="#{no_space(g.name.downcase)}Submenu"%> >
+              <ul class="scroll-menu hide-scroll">
+                <li><%= link_to "#{g.name.titleize} Home", group_path(g.id), class: 'sidebar-link' %></li>
+                <% unless g.categories.blank? %>
+                  <% g.categories.each do |c| %>
+                    <li>
+                      <%= render "layouts/drop_option", v: c, type: "cat"%>
+                      <%= " [#{recipe_count(c, "categories")}]"%>
+                    </li>
+                  <% end %>
+                <% end %>
+                <% unless g.tags.blank? %>
+                  <% g.tags.each do |t| %>
+                    <li>
+                      <%= render "layouts/drop_option", v: t, type: "tag"%>
+                      <%= " [#{recipe_count(t, "tags")}]"%>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </ul>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
 </nav>

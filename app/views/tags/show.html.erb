@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1><strong><%= @tag.name.capitalize %></strong></h1><br />
+<h1 class='text-center'><strong><%= "#{@tag.name.capitalize} Recipes" %></strong></h1><br />
 
 <%= render "recipes/recipe_preview" %>
+<br  />
+
+<div class='paginate-container d-flex'>
+  <div class='center-content'>
+    <%= paginate(@recipes) %>
+  </div>
+</div>

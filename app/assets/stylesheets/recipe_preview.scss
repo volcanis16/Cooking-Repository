@@ -1,8 +1,16 @@
 .recipe-preview {
   display: inline-block;
-  height: 250px;
   width: 250px;
   padding: 0 10px;
+}
+
+.left-bottom-border {
+  border-left: 2px solid $dark;
+  border-bottom: 2px solid $dark;
+}
+.right-top-border {
+  border-right: 2px solid $dark;
+  border-top: 2px solid $dark;
 }
 
 .drag-list-container {
@@ -14,15 +22,12 @@
   cursor : -o-grab;
   cursor : -moz-grab;
   cursor : -webkit-grab;
+  border-bottom: 5px solid $dark;
 }
 
 .preview-title {
   font-size: 1.75em;
   color: $darker;
-}
-
-.preview-link:hover {
-  background-color: rgb(238, 238, 238);
 }
 
 .index-link-preview {

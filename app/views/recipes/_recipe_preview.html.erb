@@ -1,23 +1,31 @@
-<div>
-  <% @recipe_count.times do |i| %>
-
-  <div>
-    <% recipe = @recipes[i] %>
-    <strong><%= link_to recipe.title.titleize, recipe %></strong>
-    <div><%= image_tag recipe.main_image.variant(resize_and_pad: [150, 150]) unless recipe.main_image.blank? %></div>
-    <div>
-      <p>Categories: 
-      <%= recipe.categories_full_list %></p>
-      <p>Tags: 
-      <%= recipe.tags_full_list %></p>
+<div class='container'>
+  <div class='row right-top-border'>
+    <% @recipe_count.times do |i| %>
+      <% recipe = @recipes[i] %>
+      <div class="col-6 col-lg-4 recipe-preview left-bottom-border d-flex">
+        <div class='center-content text-center'>
+          <%= link_to recipe do %>
+            <div class="preview-link">
+              <div class="preview-title"><%= recipe.title.titleize %></div>
+              <div><%= image_tag(recipe.main_image.variant(resize_and_pad: [200, 150]), class: 'image-preview') unless recipe.main_image.blank? %></div>
+            </div>
+          <% end %>
+          <div>
+            <p class='no-margin index-link-preview'>Categories: 
+              <% recipe.categories.limit(5).each do |c| %>
+                <%= link_to "##{c.name.titleize}", c, class: 'index-link-preview' %>
+              <% end %>
+            </p>
+            <p class='no-margin index-link-preview'>Tags: 
+              <% recipe.tags.limit(5).each do |t| %>
+                <%= link_to "##{t.name.titleize}", t, class: 'index-link-preview' %>
+              <% end %>
+            </p>
+          </div>
+        <br />
+        <br />
+      </div>
     </div>
-    <div>
-        <%= link_to 'Edit, ', edit_recipe_path(recipe) %>
-        <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-    </div>
-    <br />
-    <br />
+    <% end %>
   </div>
-
-  <% end %>
 </div>

@@ -12,4 +12,8 @@ module ApplicationHelper
   def recipe_count(input, table)
     Recipe.joins(table.to_sym).where("#{table}.name" => input[:name]).count
   end
+
+  def no_space(input)
+    input.gsub!(/\s/, '')
+  end
 end

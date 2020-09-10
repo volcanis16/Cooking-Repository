@@ -1,5 +1,4 @@
 <div class='dragscroll drag-list-container hide-scroll'>
-  <% list = Tag.find_by(name: 'banana').recipes%>
     <div style="width:<%= (list.length + 1) * 250 %>px">
       <% list.each do |recipe| %>
         <div class="recipe-preview">
@@ -19,6 +18,7 @@
               <% recipe.tags.limit(5).each do |t| %>
                 <%= link_to "##{t.name.titleize}", t, class: 'index-link-preview' %>
               <% end %>
+            </p>
           </div>
           <br />
           <br />

@@ -9,6 +9,8 @@ class SearchController < ApplicationController
     @recipes = tag_query(input_split[1], @recipes) unless input_split[1].empty?
     return if @recipes.blank?
     @recipes = full_query(input_split[2], @recipes) unless input_split[2].empty?
+
+    @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(30)
     @recipe_count = @recipes.count
   end
 

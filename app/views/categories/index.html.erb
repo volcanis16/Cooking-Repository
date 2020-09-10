@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<div><strong>Categories</strong></div>
+<div class="main-header"><strong>Categories:</strong></div><br />
 
 <div>
-  <ul>
-    <% @categories.each do |c| %>
-      <li>
-        <%= link_to c.name.titleize, c %>
-        <%= " [#{recipe_count(c, "categories")}]"%>
-      </li>
-    <% end %>
-  </ul>
+  <% @categories.each do |c| %>
+    <div>
+      <p class='header'><%= link_to c.name.titleize, c, class: "index-link" %></p>
+      <% list = c.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+      <%= render "layouts/drag_list", list: list%>
+    </div>
+    <br  />
+  <% end %>
 </div>

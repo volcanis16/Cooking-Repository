@@ -1,1 +1,25 @@
 <p id="notice"><%= notice %></p>
+<div class="main-header"><strong><%= @group.name.titleize %>:</strong></div><br />
+
+
+<div>
+  <% @categories.each do |c| %>
+    <div>
+      <p class='header'><%= link_to c.name.titleize, c, class: "index-link" %></p>
+      <% list = c.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+      <%= render "layouts/drag_list", list: list%>
+    </div>
+    <br  />
+  <% end %>
+</div>
+
+<div>
+  <% @tags.each do |t| %>
+    <div>
+      <p class='header'><%= link_to t.name.titleize, t, class: "index-link"  %></p>
+      <% list = t.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+      <%= render "layouts/drag_list", list: list%>
+    </div>
+    <br  />
+  <% end %>
+</div>

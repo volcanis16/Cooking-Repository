@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def show
-
+    @tags = @group.tags.order(:name)
+    @categories = @group.categories.order(:name)
   end
 
   def index

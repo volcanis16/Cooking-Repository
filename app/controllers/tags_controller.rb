@@ -2,7 +2,6 @@ class TagsController < ApplicationController
   before_action :set_tag, only: [:show]
 
   def show
-
   end
 
   def index
@@ -13,7 +12,7 @@ class TagsController < ApplicationController
 
   def set_tag
     @tag = Tag.friendly.find(params[:id])
-    @recipes = Recipe.joins(:tags).where('tags.name' => @tag[:name])
+    @recipes = @tag.recipes.order(created_at: :desc).page(params[:page]).per(30)
     @recipe_count = @recipes.count
   end
 
