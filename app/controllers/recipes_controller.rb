@@ -1,10 +1,12 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :set_recipes_and_count, only: :index
+  before_action :check_date, only: :index
 
   # GET /recipes
   # GET /recipes.json
   def index
+    @random = Option.find(1).random_category
   end
 
   # GET /recipes/1
@@ -89,4 +91,15 @@ class RecipesController < ApplicationController
               ]])
     end
 
+    # Test date and update random category for Home Page 
+    def check_date
+      date = Date.today
+      options = Option.find(1)
+  
+      if options.randomDate != date
+        options.randomDate = date
+        options.random_category = Category.order(Arel.sql('RANDOM()')).first.id
+        options.save
+      end
+    end
 end

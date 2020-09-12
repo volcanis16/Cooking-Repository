@@ -1,11 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Recipes</h1>
+<div class="ml-3">
+  <h1>Recipes</h1>
 
-<div>
-  <% list = Category.order(Arel.sql('RANDOM()')).first.recipes.limit(20) %>
-  <%= render "layouts/drag_list", list: list%>
-</div>
-<div>
-  <%= render "layouts/drag_list", list: list%>
+  <% categories = Option.find(1).categories %>
+  <% tags = Option.find(1).tags %>
+
+  <% unless categories.blank? %>
+    <% categories.each do |c| %>
+      <div>
+        <p class='header'><%= link_to "#{c.name.titleize} Recipes:", c, class: 'index-link' %></p>
+        <% list = c.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+        <%= render "layouts/drag_list", list: list%>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% unless tags.blank? %>
+    <% tags.each do |t| %>
+      <div>
+        <p class='header'><%= link_to "#{t.name.titleize} Recipes:", t, class: 'index-link' %></p>
+        <% list = t.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+        <%= render "layouts/drag_list", list: list%>
+      </div>
+    <% end %>
+  <% end %>
+  <div>
+    <% random_category = Category.find(Option.find(1).random_category) %>
+    <% list = random_category.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+    <p class='header'><%= link_to "Random Category: #{random_category.name.titleize}", random_category, class: 'index-link' %></p>
+    <%= render "layouts/drag_list", list: list%>
+  </div>
 </div>

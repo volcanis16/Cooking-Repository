@@ -22,7 +22,6 @@ class IngredientList < ApplicationRecord
   validates :recipe, presence: true
 
   belongs_to :ingredient, optional: true
-  validates :ingredient, presence: true
 
   belongs_to :unit, optional: true
   belongs_to :alt_unit, class_name: "Unit", optional: true

@@ -3,3 +3,10 @@
   font: inherit;
   font-size: xx-large;
 }
+
+.header-text:hover {
+  color: rgb(214, 214, 214);
+  text-decoration: none;
+  background-color: black;
+  padding: 0 5px;
+}
