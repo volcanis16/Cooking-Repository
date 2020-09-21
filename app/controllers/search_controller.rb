@@ -19,8 +19,7 @@ private
 
   def result_split(search)
     ##Break into array, remove whitespace, remove empty entries.
-    search_split = search.split(',').map {|s| s.strip }
-    search_split = search_split.map { |s| s.blank? ? next : s }.compact
+    search_split = split_and_strip(search, ",")
 
     ##Split off tag specific
     search_split = search_split.partition { |s| s.include?("tag:") }

@@ -24,6 +24,37 @@ require("channels")
 
 $(document).on('turbolinks:load', function() {
 
+    //New Tags/Categories confirmation dialogue
+    $("input.submit").on('click', function(event) {
+      var catContents = $("input#categories").val();
+      var tagContents = $("input#tags").val();
+
+      jQuery.ajax({
+        url: "/check_tags.json", 
+        data: { 
+          tags: tagContents, 
+          categories: catContents 
+        },
+        type: "GET",
+        dataType: "json",
+        async: false
+        }) 
+
+        .done(function( data ) {
+          console.log(data.list);
+          if(data.list == "")
+            return true;
+          if( confirm(`You are about to create new Tags and/or Categories. Please check the following list for any errors: ${data.list}`) ) 
+            return true;
+        })
+
+        .fail(function( xhr, status, errorThrown) {
+          alert( "Sorry, there was a problem!" );
+          console.log( "Error: " + errorThrown );
+          console.log( "Status: " + status );
+          console.dir( xhr );
+        })
+    })
   //Remove Ingredient
   $('form').on('click', '.remove_record', function(event) {
     $(this).prev('input[type=hidden').val('1');
@@ -72,14 +103,14 @@ $(document).on('turbolinks:load', function() {
   })
 
   //Collapse Sidebar
-  $('#sidebarCollapse').on('click', function () {
+  $('#sidebarCollapse').on('click', function() {
     $('#sidebar').toggleClass('active');
     $('i.arrow').toggleClass('fa-arrow-right');
     $('i.arrow').toggleClass('fa-arrow-left');
   });
 
   // Add text to search bar
-  $('a.dropdown-toggle').on('click', function () {
+  $('a.dropdown-toggle').on('click', function() {
     $("a.add_to_search").on('click', function(event) {
       var textToAdd = $(this).attr("data-text");
       var currentText = $("input[data-field='search_field']").val();
@@ -108,7 +139,7 @@ $(document).on('turbolinks:load', function() {
    */
 
 
-  (function (root, factory) {
+  (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['exports'], factory);
     } else if (typeof exports !== 'undefined') {

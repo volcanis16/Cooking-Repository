@@ -34,6 +34,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
+        cleanup()
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -52,6 +53,7 @@ class RecipesController < ApplicationController
     @recipe.categories_full_list=(params[:categories])
     respond_to do |format|
       if @recipe.save
+        cleanup()
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -69,6 +71,26 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  #Checks list vs existing tags/categories and returns the ones that don't already exist
+  def check_tags
+    new_tags = ""
+
+    tags = split_and_strip(params[:tags], ",")
+    categories = split_and_strip(params[:categories], ",")
+
+    names = Tag.pluck(:name)
+    tags.each { |t| new_tags += ", #{t}" unless names.include?(t) }
+
+    names = Category.pluck(:name)
+    categories.each { |c| new_tags += ", #{c}" unless names.include?(c) }
+
+    new_tags.slice!(0..1) unless new_tags.blank?
+    respond_to do |format|
+      format.json {render :json => {list: new_tags}, :status => 200 }
+    end
+
   end
 
   private
@@ -101,5 +123,17 @@ class RecipesController < ApplicationController
         options.random_category = Category.order(Arel.sql('RANDOM()')).first.id
         options.save
       end
+    end
+
+    # Test and destroy tags and categories without recipes
+    def cleanup
+      Tag.all.each do |t|
+        t.destroy if t.recipes.blank?
+      end
+
+      Category.all.each do |c|
+        c.destroy if c.recipes.blank?
+      end
+
     end
 end

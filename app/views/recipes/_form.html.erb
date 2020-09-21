@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <%= simple_form_for @recipe do |f| %>
+  <%= simple_form_for @recipe, remote: true do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
       <p class="main-header">Title:</p>
@@ -49,7 +49,7 @@
       <%= text_field_tag('categories', f.object.categories_full_list, class: 'group-field') %>
     </div><br />
     <div class="form-actions">
-      <%= f.submit %>
+      <%= f.submit class: "submit" %>
     </div>
     <br />
   <% end %>

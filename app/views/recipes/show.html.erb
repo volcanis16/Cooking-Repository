@@ -24,7 +24,11 @@
 
               <td>
                 <% ingredient = Ingredient.find(i_list.ingredient_id).name %>
-                <%= "#{i_list.unit_id.blank? ? ingredient.pluralize : ingredient}" %><%= ", #{i_list.prep}" if i_list.prep %>
+                <% if i_list.unit_id.blank? && i_list.amount %>
+                  <%= "#{ingredient.pluralize}" %><%= ", #{i_list.prep}" if i_list.prep %>
+                <% else %>
+                  <%= "#{ingredient}" %><%= ", #{i_list.prep}" if i_list.prep %>
+                <% end %>
               </td>
             </tr>
           <% end %>

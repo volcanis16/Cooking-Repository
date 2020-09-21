@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'recipes#index'
   get '/search' => 'search#search', :as => 'search'
+  get "/check_tags" => 'recipes#check_tags', :as => 'check_tags'
   resources :options, only: [:show, :edit, :update]
   resources :tags, only: [:show, :index]
   resources :groups
