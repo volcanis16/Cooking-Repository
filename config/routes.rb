@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'recipes#index'
   get '/search' => 'search#search', :as => 'search'
   get "/check_tags" => 'recipes#check_tags', :as => 'check_tags'

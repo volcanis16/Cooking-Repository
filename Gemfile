@@ -34,6 +34,7 @@ gem 'simple_form', '~> 5.0', '>= 5.0.2'
 gem 'jquery-rails'
 gem 'friendly_id', '~> 5.4.0'
 gem 'kaminari'
+gem 'devise'
 
 
 group :development, :test do
