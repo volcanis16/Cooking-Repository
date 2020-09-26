@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_09_23_151916) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -42,18 +45,18 @@ ActiveRecord::Schema.define(version: 2020_09_23_151916) do
   end
 
   create_table "categories_groups", id: false, force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "category_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "category_id", null: false
   end
 
   create_table "categories_options", id: false, force: :cascade do |t|
-    t.integer "option_id", null: false
-    t.integer "category_id", null: false
+    t.bigint "option_id", null: false
+    t.bigint "category_id", null: false
   end
 
   create_table "categories_recipes", id: false, force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "category_id", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "category_id", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -76,14 +79,14 @@ ActiveRecord::Schema.define(version: 2020_09_23_151916) do
   end
 
   create_table "groups_tags", id: false, force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "tag_id", null: false
   end
 
   create_table "ingredient_lists", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "ingredient_id"
-    t.integer "unit_id"
+    t.bigint "recipe_id"
+    t.bigint "ingredient_id"
+    t.bigint "unit_id"
     t.string "amount"
     t.string "alt_amount"
     t.string "prep"
@@ -109,8 +112,8 @@ ActiveRecord::Schema.define(version: 2020_09_23_151916) do
   end
 
   create_table "options_tags", id: false, force: :cascade do |t|
-    t.integer "option_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "option_id", null: false
+    t.bigint "tag_id", null: false
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -123,8 +126,8 @@ ActiveRecord::Schema.define(version: 2020_09_23_151916) do
   end
 
   create_table "recipes_tags", id: false, force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "tag_id", null: false
   end
 
   create_table "tags", force: :cascade do |t|

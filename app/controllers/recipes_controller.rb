@@ -124,7 +124,9 @@ class RecipesController < ApplicationController
   
       if options.randomDate != date
         options.randomDate = date
-        options.random_category = Category.order(Arel.sql('RANDOM()')).first.id
+        unless Category.order(Arel.sql('RANDOM()')).first.blank? 
+          options.random_category = Category.order(Arel.sql('RANDOM()')).first.id
+        end 
         options.save
       end
     end

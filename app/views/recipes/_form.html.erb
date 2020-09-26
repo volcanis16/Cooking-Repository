@@ -40,16 +40,16 @@
       <p class="header">Notes:</p>
       <%= f.input :notes, label: false, input_html: { class: "text-box" } %><br />
     </div>
-    <div class="tags">
-      <%= label_tag(:tags, 'Tags') %>
-      <%= text_field_tag('tags', f.object.tags_full_list, class: 'group-field') %>
-    </div><br />
     <div class="categories">
       <%= label_tag(:categories, 'Categories') %>
       <%= text_field_tag('categories', f.object.categories_full_list, class: 'group-field') %>
     </div><br />
+    <div class="tags">
+      <%= label_tag(:tags, 'Tags') %>
+      <%= text_field_tag('tags', f.object.tags_full_list, class: 'group-field') %>
+    </div><br />
     <div class="form-actions">
-      <%= f.submit class: "submit, recipe" %>
+      <%= f.submit class: "submit recipe" %>
     </div>
     <br />
   <% end %>

@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Unit.create(unit: 'g')
+Unit.create(unit: 'kg')
+Unit.create(unit: 'tsp')
+Unit.create(unit: 'Tbls')
+Unit.create(unit: 'oz')
+Unit.create(unit: 'lb')
+Unit.create(unit: 'floz')
+Unit.create(unit: 'c')
+Unit.create(unit: 'qt')
+Unit.create(unit: 'ml')
+
+User.create!({:username => "admin", :admin => true, :password => "password", :password_confirmation => "password" })
+Option.create({randomDate: Date})

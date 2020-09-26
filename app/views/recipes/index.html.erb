@@ -23,10 +23,12 @@
       </div>
     <% end %>
   <% end %>
-  <div>
-    <% random_category = Category.find(Option.find(1).random_category) %>
-    <% list = random_category.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
-    <p class='header'><%= link_to "Random Category: #{random_category.name.titleize}", random_category, class: 'index-link' %></p>
-    <%= render "layouts/drag_list", list: list%>
-  </div>
+  <% unless Option.find(1).random_category.blank? %>
+    <div>
+      <% random_category = Category.find(Option.find(1).random_category) %>
+      <% list = random_category.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
+      <p class='header'><%= link_to "Random Category: #{random_category.name.titleize}", random_category, class: 'index-link' %></p>
+      <%= render "layouts/drag_list", list: list%>
+    </div>
+  <% end %>
 </div>
