@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <h2 class="main-header">User Info</h2>
+  <table class="table table-striped table-sm">
+    <tbody>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>Username</th>
+        <th>Admin?</th>
+        <th>Times Signed in</th>
+        <th>Last Signed in at</th>
+        <th>IP</th>
+        <th>Before that</th>
+        <th>IP</th>
+      </tr>
+      <% @users.each do |u| %>
+        <tr>
+          <td><%= link_to 'Edit', edit_user_registration_path(userid: u.id)  %></td>
+          <td><%= link_to 'Delete', registration_path(resource_name, userid: u.id), data: { confirm: "Are you sure?" }, method: :delete %></td>
+          <td><%= u.username %></td>
+          <td><%= u.admin ? "yes" : "no" %></td>
+          <td><%= u.sign_in_count %></td>
+          <td><%= u.current_sign_in_at %></td>
+          <td><%= u.current_sign_in_ip %></td>
+          <td><%= u.last_sign_in_at %></td>
+          <td><%= u.last_sign_in_ip %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <span><%= link_to('New User', new_user_registration_path, class: "index-link btn btn-light mx-1") %></span>
+</div>

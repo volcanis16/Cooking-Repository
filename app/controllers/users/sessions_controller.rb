@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  skip_before_action :authenticate_user!, only: [:create, :new]
   # before_action :configure_sign_in_params, only: [:create]
+
+  def index
+    @users = User.all
+  end
 
   # GET /resource/sign_in
   # def new

@@ -16,4 +16,8 @@ module ApplicationHelper
   def no_space(input)
     input.gsub!(/\s/, '')
   end
+
+  def user_admin?
+    current_user.admin
+  end
 end

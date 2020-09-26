@@ -27,18 +27,20 @@
               <i class="arrow fa fa-arrow-right"></i>
             </button>
 
-            <button type='button' class="btn btn-light btn-sm mx-1">
-              <span><%= link_to 'New Recipe', new_recipe_path, class: 'index-link' %></span>
-            </button>
+            <%= link_to 'New Recipe', new_recipe_path, class: 'index-link btn btn-light btn-sm mx-1' %>
 
-            <button type='button' class="btn btn-light btn-sm mr-auto">
-              <span><%= link_to 'Options', edit_option_path(Option.find(1)), class: 'index-link' %></span>
-            </button>
+            <%= link_to 'Options', edit_option_path(Option.find(1)), class: 'index-link btn btn-light btn-sm mr-1' %>
+
+            <%= link_to 'Logout', destroy_user_session_path, class: 'index-link btn btn-light btn-sm mr-auto', method: :delete %>
 
             <strong><p class="header-text no-margin "><%= link_to "Andrew's Repository", root_path, class: 'header-text no-margin ' %></p></strong>
           </nav>
-          <p class="notice"><% = notice %></p>
-          <p class="alert"><% = alert %></p>
+          <% if notice %>
+            <p class="notice"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="alert"><%= alert %></p>
+          <% end %>
           <%= yield %>
         </div>
     </div>
