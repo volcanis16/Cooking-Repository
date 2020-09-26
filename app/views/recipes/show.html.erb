@@ -1,72 +1,84 @@
-<p id="notice"><%= notice %></p>
-  <div class="row">
-    <div class="col-sm-4 col-xl-3 ingredient-column">
-      <h2>
-        <strong><%= @recipe.title.titleize %></strong>
-      </h2>
-      <div class="justify-space d-flex">
-        <p class="d-inline-flex ingredient-servings no-margin">Ingredients:</p>
-        <p class="d-inline-flex ingredient-servings no-margin"><%= @recipe.default_servings %> Serving<%= "s" if @recipe.default_servings.to_i > 1 %></p>
-      </div>
-
-      <table class="table table-striped table-sm">
-        <tbody>
-          <% @recipe.ingredient_lists.each do |i_list|%>
-            <tr>
-              <td>
-                <%= i_list.amount unless i_list.amount.blank? %>
-                <%= Unit.find(i_list.unit_id).unit unless i_list.unit_id.blank?%>
-                                <% unless i_list.alt_amount.blank? %>
-                  <%= " or  #{i_list.alt_amount} #{Unit.find(i_list.alt_unit_id).unit}" %>
-                <% end %>
-
-              </td>
-
-              <td>
-                <% ingredient = Ingredient.find(i_list.ingredient_id).name %>
-                <% if i_list.unit_id.blank? && i_list.amount %>
-                  <%= "#{ingredient.pluralize}" %><%= ", #{i_list.prep}" if i_list.prep %>
-                <% else %>
-                  <%= "#{ingredient}" %><%= ", #{i_list.prep}" if i_list.prep %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+<div class="row">
+  <div class="col-sm-4 col-xl-3 ingredient-column">
+    <h2>
+      <strong><%= @recipe.title.titleize %></strong>
+    </h2>
+    <div class="justify-space d-flex">
+      <p class="d-inline-flex ingredient-servings no-margin">Ingredients:</p>
+      <p class="d-inline-flex ingredient-servings no-margin"><%= @recipe.default_servings %> Serving<%= "s" if @recipe.default_servings.to_i > 1 %></p>
     </div>
-    <div class="col-sm-8">
-      <div class="image"><%= image_tag @recipe.main_image.variant(resize_to_fit: [700, 700]) unless @recipe.main_image.blank? %></div>
-      <div>
-        <p class="header">Instructions:</p>
-        <p class="body-text"><%= @recipe.description %></p>
-      </div>
-      <div>
-        <p class="header">Notes:</p>
-        <p class="body-text"><%= @recipe.notes %></p>
-      </div>
 
-      <div>
-        <p class="header">Categories:</p>
-        <p>
-        <% count = @recipe.categories.count %>
-        <% @recipe.categories.each_with_index do |c, idx| %>
-          <%= link_to "##{c.name.titleize}", c, class: 'index-link' %><%= "," unless count == (idx + 1) %>
+    <table class="table table-striped table-sm">
+      <tbody>
+        <% @recipe.ingredient_lists.each do |i_list|%>
+          <tr>
+            <td>
+              <%= i_list.amount unless i_list.amount.blank? %>
+              <%= Unit.find(i_list.unit_id).unit unless i_list.unit_id.blank?%>
+                              <% unless i_list.alt_amount.blank? %>
+                <%= " or  #{i_list.alt_amount} #{Unit.find(i_list.alt_unit_id).unit}" %>
+              <% end %>
+
+            </td>
+
+            <td>
+              <% ingredient = Ingredient.find(i_list.ingredient_id).name %>
+              <% if i_list.unit_id.blank? && i_list.amount %>
+                <%= "#{ingredient.pluralize}" %><%= ", #{i_list.prep}" if i_list.prep %>
+              <% else %>
+                <%= "#{ingredient}" %><%= ", #{i_list.prep}" if i_list.prep %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-        </p>
-      </div>
-
-      <div>
-        <p class="header">Tags:</p>
-        <p>
-        <% count = @recipe.tags.count %>
-        <% @recipe.tags.each_with_index do |t, idx| %>
-          <%= link_to "##{t.name.titleize}", t, class: 'index-link' %><%= "," unless count == (idx + 1) %>
-        <% end %>
-        </p>
-      </div>
-
-      <%= link_to 'Edit', edit_recipe_path(@recipe), , class: "index-link btn btn-light mx-1" %>
-      <%= link_to 'Back', :back, , class: "index-link btn btn-light mr-1" %>
-    </div>
+      </tbody>
+    </table>
   </div>
+  <div class="col-sm-8">
+    <div class="image"><%= image_tag @recipe.main_image.variant(resize_to_fit: [700, 700]) unless @recipe.main_image.blank? %></div>
+    <div>
+      <p class="header">Instructions:</p>
+      <p class="body-text"><%= simple_format(@recipe.description, class: "body-text")%></p>
+    </div>
+    <div>
+      <p class="header">Notes:</p>
+      <p class="body-text"><%= simple_format(@recipe.notes, class: "body-text") %></p>
+    </div>
+
+    <%= simple_form_for @recipe do |f| %>
+      <%= f.hidden_field :notes_only, :value => 1 %>
+      <div class="notes-box">
+        <p class="header">Add Notes:</p>
+        <%= f.input :notes, label: false, input_html: { class: "text-box", value: "" } %><br />
+      </div>
+      <div class="form-actions">
+        <%= f.submit class: "submit" %>
+      </div>
+    <% end %>
+
+    <div>
+      <p class="header">Categories:</p>
+      <p>
+      <% count = @recipe.categories.count %>
+      <% @recipe.categories.each_with_index do |c, idx| %>
+        <%= link_to "##{c.name.titleize}", c, class: 'index-link' %><%= "," unless count == (idx + 1) %>
+      <% end %>
+      </p>
+    </div>
+
+    <div>
+      <p class="header">Tags:</p>
+      <p>
+      <% count = @recipe.tags.count %>
+      <% @recipe.tags.each_with_index do |t, idx| %>
+        <%= link_to "##{t.name.titleize}", t, class: 'index-link' %><%= "," unless count == (idx + 1) %>
+      <% end %>
+      </p>
+    </div>
+    <% if current_user.admin %>
+      <%= link_to 'Edit', edit_recipe_path(@recipe), class: "index-link btn btn-light mx-1" %>
+      <%= link_to 'Delete', @recipe, data: { confirm: "Are you sure?" }, method: :delete, class: "index-link btn btn-light mx-1"  %>
+    <% end %>
+    <%= link_to 'Back', :back, class: "index-link btn btn-light mr-1" %>
+  </div>
+</div>

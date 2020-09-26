@@ -28,10 +28,15 @@ class Recipe < ApplicationRecord
         ingredient.name = strip_whitespace(ingredient.name)
         recipe.ingredients << ingredient
         ingredient_list = recipe.ingredient_lists.last
-        ingredient_list.fill_data(value[:ingredient_lists_attributes]['0'], ingredient.id)
+        ingredient_list.fill_data(value[:ingredient_lists_attributes].values[0], ingredient.id)
       end
     end
 
+    recipe
+  end
+
+  def self.update_notes(recipe, prm)
+    recipe.notes += "\n\n#{prm[:notes]}"
     recipe
   end
 

@@ -25,7 +25,7 @@ require("channels")
 $(document).on('turbolinks:load', function() {
 
     //New Tags/Categories confirmation dialogue
-    $("input.submit").on('click', function(event) {
+    $("input.submit.recipe").on('click', function(event) {
       var catContents = $("input#categories").val();
       var tagContents = $("input#tags").val();
 

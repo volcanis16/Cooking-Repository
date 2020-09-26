@@ -4,6 +4,7 @@ class Users::RegistrationsController < DeviseController
   prepend_before_action :require_no_authentication, only: [:cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
+  before_action :check_admin
   before_action :configure_sign_up_params, only: [:create]
   before_action :set_account, except: [:new, :update, :create]
   # before_action :configure_account_update_params, only: [:update]
@@ -84,6 +85,13 @@ class Users::RegistrationsController < DeviseController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  end
+
+  def check_admin
+    unless current_user.admin
+      flash.notice = "You don't have access to that page."
+      redirect_back fallback_location: root_path
+    end
   end
 
   def set_account

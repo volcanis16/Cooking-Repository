@@ -47,10 +47,14 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
-    @recipe = Recipe.update_data(@recipe, recipe_params)
-    #Split and assign tags and categories
-    @recipe.tags_full_list=(params[:tags])
-    @recipe.categories_full_list=(params[:categories])
+    if recipe_params[:notes_only].to_i == 1
+      @recipe = Recipe.update_notes(@recipe, recipe_params)
+    else
+      @recipe = Recipe.update_data(@recipe, recipe_params)
+      #Split and assign tags and categories
+      @recipe.tags_full_list=(params[:tags])
+      @recipe.categories_full_list=(params[:categories])
+    end
     respond_to do |format|
       if @recipe.save
         cleanup()
@@ -107,7 +111,7 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:main_image, :title, :description, :notes, :default_servings,
+      params.require(:recipe).permit(:notes_only, :main_image, :title, :description, :notes, :default_servings,
           ingredients_attributes: [:id, :name, :_destroy, 
             ingredient_lists_attributes: [:id, :unit_id, :amount, :alt_unit_id, :alt_amount, :prep, :_destroy, 
               ]])

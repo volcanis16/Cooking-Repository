@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   skip_before_action :authenticate_user!, only: [:create, :new]
+  layout "sign_in", only: [:new]
   # before_action :configure_sign_in_params, only: [:create]
 
   def index
