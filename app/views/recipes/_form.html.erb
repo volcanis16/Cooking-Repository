@@ -5,7 +5,7 @@
       <p class="main-header">Title:</p>
       <%= f.input :title, label: false, input_html: {class: "title-field"} %><br /><br />
       <%= image_tag f.object.main_image unless f.object.main_image.blank? %><br /><br />
-      <%= f.input :main_image, label: "Change Image" %>
+      <%= f.input :main_image, label: "Change Image", input_html: {direct_upload: true} %>
       <%= f.input :default_servings, label: "Default Servings", collection: 1..99, input_html: { class: "default-servings" } %>
     </div>
 
