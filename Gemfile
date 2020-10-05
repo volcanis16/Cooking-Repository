@@ -38,6 +38,7 @@ gem 'kaminari'
 gem 'devise'
 gem 'google-cloud-storage', "~> 1.11", require: false
 gem 'rack-timeout'
+gem "appengine", "~> 0.4.1"
 
 
 group :development, :test do

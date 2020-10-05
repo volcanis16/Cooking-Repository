@@ -10,6 +10,12 @@
 # Ignore Environment File
 /.env
 
+# Ignore Procfile
+/Procfile
+
+# Ignore app yaml
+/app.yaml
+
 # Ignore Key File
 /andrews-repository-4c959c16328a.json
 
