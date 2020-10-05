@@ -37,6 +37,7 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'kaminari'
 gem 'devise'
 gem 'google-cloud-storage', "~> 1.11", require: false
+gem 'rack-timeout'
 
 
 group :development, :test do
