@@ -1,4 +1,5 @@
 class OptionsController < ApplicationController
+  before_action :check_admin, except: [:show]
 
   def show
     redirect_to root_path

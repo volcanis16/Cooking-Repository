@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:admin])
     devise_parameter_sanitizer.permit(:update, keys: [:account_id])
   end
+
+  def check_admin
+    unless current_user.admin
+      flash.notice = "You don't have access to that page."
+      redirect_back fallback_location: root_path
+    end
+  end
 end

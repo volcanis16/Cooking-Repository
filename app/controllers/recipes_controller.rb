@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :set_recipes_and_count, only: :index
   before_action :check_date, only: :index
+  before_action :check_admin, except: [:show, :index, :update]
 
   # GET /recipes
   # GET /recipes.json
