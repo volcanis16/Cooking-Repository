@@ -36,6 +36,7 @@ gem 'jquery-rails'
 gem 'friendly_id', '~> 5.4.0'
 gem 'kaminari'
 gem 'devise'
+gem 'google-cloud-storage', "~> 1.8", require: false
 gem 'rack-timeout'
 
 
