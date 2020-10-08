@@ -4,8 +4,12 @@
       <strong><%= @recipe.title.titleize %></strong>
     </h2>
     <div class="justify-space d-flex">
-      <p class="d-inline-flex ingredient-servings no-margin"><%= "Prep: #{@recipe.prep}min" %></p>
-      <p class="d-inline-flex ingredient-servings no-margin"><%= "Cook: #{@recipe.cook}min" %></p>
+      <% unless @recipe.prep.blank?%>
+        <p class="d-inline-flex ingredient-servings no-margin"><%= "Prep: #{@recipe.prep}min" %></p>
+      <% end %>
+      <% unless @recipe.cook.blank?%>
+        <p class="d-inline-flex ingredient-servings no-margin"><%= "Cook: #{@recipe.cook}min" %></p>
+      <% end %>
     </div>
 
     <div class="justify-space d-flex">
