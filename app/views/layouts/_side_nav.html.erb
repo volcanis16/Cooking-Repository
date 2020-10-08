@@ -11,6 +11,9 @@
       <% end %>
     </li>
   </ul>
+  <div class="components">
+    <strong><%= link_to "All Recipes", recipes_all_path, class: "sidebar-link all-recipes" %></strong>
+  </div>
   <ul class="list_unstyled components">
     <li class="dropdown-list">
       <strong><%= link_to "Categories:", "#categoriesSubmenu", class: "dropdown-toggle", 'aria-expanded': "false", data: { toggle: "collapse" } %></strong>

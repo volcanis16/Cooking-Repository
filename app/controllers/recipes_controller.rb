@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
   # GET /recipes.json
   def index
     @random = Option.find(1).random_category
+    @random_list = Recipe.all.order(Arel.sql('RANDOM()')).limit(20)
   end
 
   # GET /recipes/1
@@ -22,6 +23,11 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+  end
+
+  def showall
+    @recipes = Recipe.all.order(:title).page(params[:page]).per(30)
+    @recipe_count = @recipes.count
   end
 
   # POST /recipes

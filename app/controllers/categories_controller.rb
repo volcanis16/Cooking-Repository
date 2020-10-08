@@ -13,8 +13,8 @@ class CategoriesController < ApplicationController
 
   def set_cat
     @category = Category.friendly.find(params[:id])
-    @recipes = @category.recipes.order(created_at: :desc).page(params[:page]).per(30)
-    @recipe_count = @recipes.count
+    @recipe_count = @category.recipes.count
+    @recipes = @category.recipes.order(:title).page(params[:page]).per(30)
   end
 
 end

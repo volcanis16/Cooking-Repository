@@ -1,0 +1,10 @@
+<h1 class='text-center'><strong><%= "All Recipes" %></strong></h1><br />
+
+<%= render "recipes/recipe_preview" %>
+<br  />
+
+<div class='paginate-container d-flex'>
+  <div class='center-content'>
+    <%= paginate(@recipes) %>
+  </div>
+</div>

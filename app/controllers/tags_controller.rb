@@ -12,8 +12,8 @@ class TagsController < ApplicationController
 
   def set_tag
     @tag = Tag.friendly.find(params[:id])
-    @recipes = @tag.recipes.order(created_at: :desc).page(params[:page]).per(30)
-    @recipe_count = @recipes.count
+    @recipe_count = @tag.recipes.count
+    @recipes = @tag.recipes.order(:title).page(params[:page]).per(30)
   end
 
 end

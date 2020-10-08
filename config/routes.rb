@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/users/index' => 'users/sessions#index', :as => 'users_index'
   end
 
+  get '/recipes/index' => 'recipes#showall', :as => 'recipes_all'
   get '/search' => 'search#search', :as => 'search'
   get "/check_tags" => 'recipes#check_tags', :as => 'check_tags'
 
@@ -23,8 +24,5 @@ Rails.application.routes.draw do
     end
   end
 
-
-
-  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

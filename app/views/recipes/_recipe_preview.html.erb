@@ -1,8 +1,8 @@
 <div class='container'>
-  <div class='row right-top-border'>
+  <div class='row'>
     <% @recipe_count.times do |i| %>
       <% recipe = @recipes[i] %>
-      <div class="col-6 col-lg-4 recipe-preview left-bottom-border d-flex">
+      <div class="col-6 col-lg-4 recipe-preview recipe-border d-flex">
         <div class='center-content text-center'>
           <%= link_to recipe do %>
             <div class="preview-link">
