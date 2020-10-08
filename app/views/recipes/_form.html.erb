@@ -6,7 +6,11 @@
       <%= f.input :title, label: false, input_html: {class: "title-field"} %><br /><br />
       <%= image_tag f.object.main_image unless f.object.main_image.blank? %><br /><br />
       <%= f.input :main_image, label: "Change Image", input_html: {direct_upload: true} %>
-      <%= f.input :default_servings, label: "Default Servings", collection: 1..99, input_html: { class: "default-servings" } %>
+      <div class="d-inline-flex">
+        <div class="mx-2"><%= f.input :default_servings, label: "Default Servings", collection: 1..99, input_html: { class: "default-servings" } %></div>
+        <div class="mr-2"><%= f.input :prep, label: "Prep Time: " %></div>
+        <div><%= f.input :cook, label: "Cook Time: " %></div>
+      </div>
     </div>
 
     <table class="table table-width">

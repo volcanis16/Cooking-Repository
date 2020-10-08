@@ -4,6 +4,11 @@
       <strong><%= @recipe.title.titleize %></strong>
     </h2>
     <div class="justify-space d-flex">
+      <p class="d-inline-flex ingredient-servings no-margin"><%= "Prep: #{@recipe.prep}min" %></p>
+      <p class="d-inline-flex ingredient-servings no-margin"><%= "Cook: #{@recipe.cook}min" %></p>
+    </div>
+
+    <div class="justify-space d-flex">
       <p class="d-inline-flex ingredient-servings no-margin">Ingredients:</p>
       <p class="d-inline-flex ingredient-servings no-margin"><%= @recipe.default_servings %> Serving<%= "s" if @recipe.default_servings.to_i > 1 %></p>
     </div>
