@@ -88,7 +88,7 @@ class Users::RegistrationsController < DeviseController
   end
 
   def check_admin
-    unless current_user.admin
+    if user_signed_in? && !current_user.admin
       flash.notice = "You don't have access to that page."
       redirect_back fallback_location: root_path
     end

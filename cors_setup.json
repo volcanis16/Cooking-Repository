@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["https://rocky-dusk-41500.herokuapp.com/"],
+    "origin": ["https://cooking-repository.herokuapp.com/"],
     "method": ["PUT"],
     "responseHeader": ["Origin", "Content-Type", "Content-MD5", "Content-Disposition"],
     "maxAgeSeconds": 3600
