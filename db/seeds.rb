@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Option.create(randomDate: Date.today)
 Unit.create(unit: 'g')
 Unit.create(unit: 'kg')
 Unit.create(unit: 'tsp')
@@ -17,4 +18,3 @@ Unit.create(unit: 'qt')
 Unit.create(unit: 'ml')
 
 User.create!({:username => "admin", :admin => true, :password => "password", :password_confirmation => "password" })
-Option.create({randomDate: Date})

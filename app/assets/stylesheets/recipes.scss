@@ -8,6 +8,16 @@ $dark: rgb(55, 55, 55);
   padding-right: 0;
 }
 
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+.table-width {
+  max-width: 950px;
+}
+
 .amount {
   max-width: 75px;
   padding-right: 0;

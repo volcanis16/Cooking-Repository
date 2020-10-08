@@ -79,11 +79,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  timeout: 5000
-  username: <%= ENV["POSTGRE_USER"] %>
-  password: <%= ENV["POSTGRE_PASS"] %>
-  database: "recipe_directory"
-  host:   <%= ENV["POSTGRE_HOST"] %>
+ url: <%= ENV['DATABASE_URL'] %>

@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://localhost:3000/"],
+    "origin": ["https://andrews-repository.uc.r.appspot.com"],
     "method": ["PUT"],
     "responseHeader": ["Origin", "Content-Type", "Content-MD5", "Content-Disposition"],
     "maxAgeSeconds": 3600
