@@ -64,7 +64,10 @@ $(document).on('turbolinks:load', function() {
 
   //Add Ingredient
   $('form').on('click', '.add_fields', function(event) {
-    $('.fields').append($(this).data('fields'));
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    $('.fields').append($(this).data('fields').replace(regexp, time));
     $("button.add-to-tags").last().on('click', function(event) {
       var textToAdd = $(this).closest("tr").find(".ingredient-name").val();
       var currentText = $("#tags").val();
