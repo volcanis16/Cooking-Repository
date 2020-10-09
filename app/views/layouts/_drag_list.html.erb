@@ -1,11 +1,11 @@
 <div class='dragscroll drag-list-container hide-scroll'>
-    <div style="width:<%= (list.length + 1) * 250 %>px">
+    <div style="width:<%= (list.length + 1) * 350 %>px">
       <% list.each do |recipe| %>
-        <div class="recipe-preview">
+        <div class="drag-recipe-preview align-top">
           <%= link_to recipe do %>
             <div class=preview-link>
               <div class="preview-title"><%= recipe.title.titleize %></div>
-              <div><%= image_tag(recipe.main_image.variant(resize_and_pad: [150, 150]), class: 'image-preview') unless recipe.main_image.blank? %></div>
+              <div><%= image_tag(recipe.main_image.variant(resize_and_pad: [200, 200]), class: 'image-preview') unless recipe.main_image.blank? %></div>
             </div>
           <% end %>
           <div>

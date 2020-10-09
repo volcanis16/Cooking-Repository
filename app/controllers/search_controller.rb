@@ -62,10 +62,10 @@ private
     ##Positive query
     unless input[1].empty?
       input[1].each_with_index do |name, idx|
-        recipes = Recipe.joins("INNER JOIN 'categories_recipes' 'crf#{idx}' ON 'crf#{idx}'.'recipe_id' = 'recipes'.'id' 
-          INNER JOIN 'categories' 'cf#{idx}' ON 'cf#{idx}'.'id' = 'crf#{idx}'.'category_id' 
-          INNER JOIN 'recipes_tags' 'rtf#{idx}' ON 'rtf#{idx}'.'recipe_id' = 'recipes'.'id' 
-            INNER JOIN 'tags' 'tf#{idx}' ON 'tf#{idx}'.'id' = 'rtf#{idx}'.'tag_id'"
+        recipes = Recipe.joins("INNER JOIN categories_recipes crf#{idx} ON crf#{idx}.recipe_id = recipes.id 
+          INNER JOIN categories cf#{idx} ON cf#{idx}.id = crf#{idx}.category_id 
+          INNER JOIN recipes_tags rtf#{idx} ON rtf#{idx}.recipe_id = recipes.id 
+            INNER JOIN tags tf#{idx} ON tf#{idx}.id = rtf#{idx}.tag_id"
               ).where(["cf#{idx}.name = ? OR tf#{idx}.name = ? OR recipes.title LIKE ?", name, name, "%#{name}%"]).merge(recipes)
       end
     end
@@ -81,8 +81,8 @@ private
 
   def cat_positive(input, recipes)
     input.each_with_index do |name, idx|
-      recipes = Recipe.joins("INNER JOIN 'categories_recipes' 'cr#{idx}' ON 'cr#{idx}'.'recipe_id' = 'recipes'.'id' INNER JOIN
-         'categories' 'c#{idx}' ON 'c#{idx}'.'id' = 'cr#{idx}'.'category_id'").where("c#{idx}.name = ?", name).merge(recipes)
+      recipes = Recipe.joins("INNER JOIN categories_recipes cr#{idx} ON cr#{idx}.recipe_id = recipes.id INNER JOIN
+         categories c#{idx} ON c#{idx}.id = cr#{idx}.category_id").where("c#{idx}.name = ?", name).merge(recipes)
     end
     recipes
   end
@@ -91,8 +91,8 @@ private
     input.each_with_index do |name, idx|
       category = Category.find_by("name = ?", name)
       if !category.nil?
-        recipes = Recipe.joins("INNER JOIN 'categories_recipes' 'ncr#{idx}' ON 'ncr#{idx}'.'recipe_id' = 'recipes'.'id' INNER JOIN
-           'categories' 'nc#{idx}' ON 'nc#{idx}'.'id' = 'ncr#{idx}'.'category_id'").where('recipes.id NOT IN (?)', category.recipes.pluck(:id)).merge(recipes)
+        recipes = Recipe.joins("INNER JOIN categories_recipes ncr#{idx} ON ncr#{idx}.recipe_id = recipes.id INNER JOIN
+           categories nc#{idx} ON nc#{idx}.id = ncr#{idx}.category_id").where('recipes.id NOT IN (?)', category.recipes.pluck(:id)).merge(recipes)
       end
     end
     recipes
@@ -100,8 +100,8 @@ private
 
   def tag_positive(input, recipes)
     input.each_with_index do |name, idx|
-      recipes = Recipe.joins("INNER JOIN 'recipes_tags' 'rt#{idx}' ON 'rt#{idx}'.'recipe_id' = 'recipes'.'id' INNER JOIN
-         'tags' 't#{idx}' ON 't#{idx}'.'id' = 'rt#{idx}'.'tag_id'").where("t#{idx}.name = ?", name).merge(recipes)
+      recipes = Recipe.joins("INNER JOIN recipes_tags rt#{idx} ON rt#{idx}.recipe_id = recipes.id INNER JOIN
+         tags t#{idx} ON t#{idx}.id = rt#{idx}.tag_id").where("t#{idx}.name = ?", name).merge(recipes)
     end
     recipes
   end
@@ -110,8 +110,8 @@ private
     input.each_with_index do |name, idx|
       tag = Tag.find_by("name = ?", name)
       if !tag.nil?
-        recipes = Recipe.joins("INNER JOIN 'recipes_tags' 'nrt#{idx}' ON 'nrt#{idx}'.'recipe_id' = 'recipes'.'id' INNER JOIN
-          'tags' 'nt#{idx}' ON 'nt#{idx}'.'id' = 'nrt#{idx}'.'tag_id'").where('recipes.id NOT IN (?)', tag.recipes.pluck(:id)).merge(recipes)
+        recipes = Recipe.joins("INNER JOIN recipes_tags nrt#{idx} ON nrt#{idx}.recipe_id = recipes.id INNER JOIN
+          tags nt#{idx} ON nt#{idx}.id = nrt#{idx}.tag_id").where('recipes.id NOT IN (?)', tag.recipes.pluck(:id)).merge(recipes)
       end
     end
     recipes

@@ -5,10 +5,10 @@
     </h2>
     <div class="justify-space d-flex">
       <% unless @recipe.prep.blank?%>
-        <p class="d-inline-flex ingredient-servings no-margin"><%= "Prep: #{@recipe.prep}min" %></p>
+        <p class="d-inline-flex ingredient-servings no-margin"><%= "Prep: #{@recipe.prep}" %></p>
       <% end %>
       <% unless @recipe.cook.blank?%>
-        <p class="d-inline-flex ingredient-servings no-margin"><%= "Cook: #{@recipe.cook}min" %></p>
+        <p class="d-inline-flex ingredient-servings no-margin"><%= "Cook: #{@recipe.cook}" %></p>
       <% end %>
     </div>
 
