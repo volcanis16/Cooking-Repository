@@ -9,7 +9,7 @@
     <%= render "layouts/drag_list", list: @random_list%>
   </div>
 
-  <% unless Option.find(1).random_category.blank? || Category.find(Option.find(1).random_category).blank? %>
+  <% unless Option.find(1).random_category.blank? || !Category.exists?(Option.find(1).random_category) %>
     <div>
       <% random_category = Category.find(Option.find(1).random_category) %>
       <% list = random_category.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
