@@ -1,0 +1,10 @@
+<p class='no-margin index-link-preview'>Categories: 
+  <% recipe.categories.limit(5).each do |c| %>
+    <%= link_to "##{c.name.titleize}", c, class: 'index-link-preview' %>
+  <% end %>
+</p>
+<p class='no-margin index-link-preview'>Tags: 
+  <% recipe.tags.limit(5).each do |t| %>
+    <%= link_to "##{t.name.titleize}", t, class: 'index-link-preview' %>
+  <% end %>
+</p>

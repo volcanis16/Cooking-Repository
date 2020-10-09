@@ -9,7 +9,8 @@
       <div class="d-inline-flex">
         <div class="mx-2"><%= f.input :default_servings, label: "Default Servings", collection: 1..99, input_html: { class: "default-servings" } %></div>
         <div class="mr-2"><%= f.input :prep, label: "Prep Time: " %></div>
-        <div><%= f.input :cook, label: "Cook Time: " %></div>
+        <div class="mr-2"><%= f.input :cook, label: "Cook Time: " %></div>
+        <div><%= f.input :rating, label: "Rating", collection: ((0..5).step(0.5)) %>
       </div>
     </div>
 

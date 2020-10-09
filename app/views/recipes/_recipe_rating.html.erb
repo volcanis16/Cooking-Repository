@@ -1,0 +1,14 @@
+<% unless recipe.rating.blank? %>
+  <p class='no-margin index-link-preview'>Rating: 
+    <a><%= recipe.rating %></a>
+    <% recipe.rating.floor.times do %>
+      <i class="fa fa-star" aria-hidden="true"></i>
+    <% end %>
+    <% if (recipe.rating % 1) > 0 %>
+      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+    <% end %>
+    <% (5 - recipe.rating.ceil).times do %>
+      <i class="fa fa-star-o" aria-hidden="true"></i>
+    <% end %>
+  </p>
+<% end %>

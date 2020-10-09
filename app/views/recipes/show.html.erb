@@ -3,6 +3,7 @@
     <h2>
       <strong><%= @recipe.title.titleize %></strong>
     </h2>
+    <div><%= render partial: "recipes/recipe_rating", locals: {recipe: @recipe} %></div>
     <div class="justify-space d-flex">
       <% unless @recipe.prep.blank?%>
         <p class="d-inline-flex ingredient-servings no-margin"><%= "Prep: #{@recipe.prep}" %></p>
