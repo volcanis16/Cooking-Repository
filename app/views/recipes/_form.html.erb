@@ -27,14 +27,14 @@
         </tr>
       </thead>
       <tbody class='fields'>
-        <%= f.simple_fields_for :ingredients do |i| %>
+        <%= f.simple_fields_for :ingredient_lists do |i| %>
           <%= render "ingredient", f: i%>
         <% end %>
       </tbody>
     </table>
 
     <div class='links'>
-      <%= link_to_add_row('Add Ingredient', f, :ingredients, class: 'btn btn-primary')%>
+      <%= link_to_add_row('Add Ingredient', f, :ingredient_lists, class: 'btn btn-primary')%>
     </div><br  />
     <div class="instructions-box">
       <p class="header">Instructions:</p>

@@ -21,14 +21,14 @@ class Recipe < ApplicationRecord
   end
 
   def self.initialize_ingredients(recipe, prm)
-    prm[:ingredients_attributes].each do |key, value|
-      unless value[:_destroy] == '1'
+    prm[:ingredient_lists_attributes].each do |key, value|
+      unless value[:_destroy] == '1' || value[:ingredient_attributes][:name].blank?
         sleep(0.001)
-        ingredient = Ingredient.where(name: value[:name].singularize.downcase).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
+        ingredient = Ingredient.where(name: value[:ingredient_attributes][:name].singularize.downcase).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
         ingredient.name = strip_whitespace(ingredient.name)
         recipe.ingredients << ingredient
         ingredient_list = recipe.ingredient_lists.last
-        ingredient_list.fill_data(value[:ingredient_lists_attributes].values[0], ingredient.id)
+        ingredient_list.fill_data(value, ingredient.id)
       end
     end
 
@@ -78,7 +78,7 @@ class Recipe < ApplicationRecord
 
   has_one_attached :main_image
   
-  accepts_nested_attributes_for :ingredients, reject_if:proc { |att| att['name'].blank? }
+  accepts_nested_attributes_for :ingredient_lists, allow_destroy: true
 
   def acceptable_image
     return unless main_image.attached?

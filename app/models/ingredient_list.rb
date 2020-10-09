@@ -22,6 +22,7 @@ class IngredientList < ApplicationRecord
   validates :recipe, presence: true
 
   belongs_to :ingredient, optional: true
+  accepts_nested_attributes_for :ingredient, allow_destroy: true, reject_if:proc { |att| att['name'].blank? }
 
   belongs_to :unit, optional: true
   belongs_to :alt_unit, class_name: "Unit", optional: true
