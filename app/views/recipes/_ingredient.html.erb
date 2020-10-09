@@ -11,7 +11,7 @@
   <td><%= f.input :name, label: false, input_html: {class: "ingredient-name"} %></td>
 
   <%= f.simple_fields_for :ingredient_lists do |i_list| %>
-    <% if i_list.object.recipe_id = @recipe.id || i_list.object.recipe_id.blank? %>
+    <% if i_list.object.recipe_id == @recipe.id || i_list.object.recipe_id.blank? %>
       <td><%= i_list.input :prep, label: false %></td>
       <td><%= i_list.input :amount, input_html: { class: "amount" }, label: false %></td>
       <td>
