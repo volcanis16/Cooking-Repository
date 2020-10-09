@@ -24,7 +24,7 @@ class Recipe < ApplicationRecord
     prm[:ingredient_lists_attributes].each do |key, value|
       unless value[:_destroy] == '1' || value[:ingredient_attributes][:name].blank?
         sleep(0.001)
-        ingredient = Ingredient.where(name: value[:ingredient_attributes][:name].singularize.downcase).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
+        ingredient = Ingredient.where(name: value[:ingredient_attributes][:name].downcase).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
         ingredient.name = strip_whitespace(ingredient.name)
         recipe.ingredients << ingredient
         ingredient_list = recipe.ingredient_lists.last
