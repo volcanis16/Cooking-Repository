@@ -44,11 +44,11 @@
     <div class="image"><%= image_tag @recipe.main_image.variant(resize_to_fit: [700, 700]) unless @recipe.main_image.blank? %></div>
     <div>
       <p class="header">Instructions:</p>
-      <p class="body-text"><%= simple_format(@recipe.description, class: "body-text")%></p>
+      <p class="body-text"><%= simple_format(@recipe.description, class: "dark-text")%></p>
     </div>
     <div>
       <p class="header">Notes:</p>
-      <p class="body-text"><%= simple_format(@recipe.notes, class: "body-text") %></p>
+      <p class="body-text"><%= simple_format(@recipe.notes, class: "dark-text") %></p>
     </div>
 
     <%= simple_form_for @recipe do |f| %>
@@ -67,7 +67,7 @@
       <p>
       <% count = @recipe.categories.count %>
       <% @recipe.categories.each_with_index do |c, idx| %>
-        <%= link_to "##{c.name.titleize}", c, class: 'index-link' %><%= "," unless count == (idx + 1) %>
+        <%= link_to "##{c.name.titleize}", c, class: 'dark-text' %><%= "," unless count == (idx + 1) %>
       <% end %>
       </p>
     </div>
@@ -77,14 +77,14 @@
       <p>
       <% count = @recipe.tags.count %>
       <% @recipe.tags.each_with_index do |t, idx| %>
-        <%= link_to "##{t.name.titleize}", t, class: 'index-link' %><%= "," unless count == (idx + 1) %>
+        <%= link_to "##{t.name.titleize}", t, class: 'dark-text' %><%= "," unless count == (idx + 1) %>
       <% end %>
       </p>
     </div>
     <% if current_user.admin %>
-      <%= link_to 'Edit', edit_recipe_path(@recipe), class: "index-link btn btn-light mx-1" %>
-      <%= link_to 'Delete', @recipe, data: { confirm: "Are you sure?" }, method: :delete, class: "index-link btn btn-light mx-1"  %>
+      <%= link_to 'Edit', edit_recipe_path(@recipe), class: "dark-text btn btn-light mx-1" %>
+      <%= link_to 'Delete', @recipe, data: { confirm: "Are you sure?" }, method: :delete, class: "dark-text btn btn-light mx-1"  %>
     <% end %>
-    <%= link_to 'Back', :back, class: "index-link btn btn-light mr-1" %>
+    <%= link_to 'Back', :back, class: "dark-text btn btn-light mr-1" %>
   </div>
 </div>

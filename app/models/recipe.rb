@@ -11,18 +11,23 @@ class Recipe < ApplicationRecord
     recipe = initialize_ingredients(recipe, prm)
   end
 
+  #Edit existing recipe
   def self.update_data(recipe, prm)
     recipe.assign_attributes(title: prm[:title], description: prm[:description], notes: prm[:notes], 
                           default_servings: prm[:default_servings], cook: prm[:cook], prep: prm[:prep], rating: prm[:rating])
     recipe.main_image.attach(prm[:main_image]) unless prm[:main_image].blank?
     recipe.title = strip_whitespace(recipe.title)
+
+    #Clear existing ingredient links then create new links and information
     recipe.ingredients.clear
     recipe = initialize_ingredients(recipe, prm)
   end
 
+  #Find or initialize each ingredient and add data to ingredient_list table
   def self.initialize_ingredients(recipe, prm)
     prm[:ingredient_lists_attributes].each do |key, value|
       unless value[:_destroy] == '1' || value[:ingredient_attributes][:name].blank?
+        #Delay for 1 millisecond to make sure ID's are unique
         sleep(0.001)
         ingredient = Ingredient.where(name: value[:ingredient_attributes][:name].downcase).first_or_initialize(id: (Time.now.to_f * 1000).to_i)
         ingredient.name = strip_whitespace(ingredient.name)
@@ -40,26 +45,38 @@ class Recipe < ApplicationRecord
     recipe
   end
 
+  #Combines all tags into one string
   def tags_full_list
     self.tags.all.map { |t| t.name }.join(', ')
   end
 
+  #Breaks down tags input and creates any new ones
   def tags_full_list=(tags)
     split = tags.downcase.split(', ')
+
+    #Clear tags attached to recipe
     self.tags.clear
+
+    #Find the tag or create a new one, then assign it to calling recipe
     split.each do |t|
       tag = Tag.where(:name => t).first_or_create
       self.tags << tag
     end
   end
 
+  #Combines all categories into one string
   def categories_full_list
     self.categories.all.map { |c| c.name }.join(', ')
   end
 
+  #Breaks down categories input and creates any new ones
   def categories_full_list=(categories)
     split = categories.downcase.split(', ')
+
+    #Clear categories attached to recipe
     self.categories.clear
+
+    #Find the category or create a new one, then assign it to calling recipe
     split.each do |c|
       category = Category.where(:name => c).first_or_create
       self.categories << category
@@ -67,7 +84,7 @@ class Recipe < ApplicationRecord
   end
 
   validates :title, presence: true
-  validates :default_servings, presence: true, length: {maximum: 2}
+  validates :default_servings, length: {maximum: 2}
   validate :acceptable_image
 
   has_and_belongs_to_many :categories, optional: true

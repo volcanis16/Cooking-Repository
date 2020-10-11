@@ -1,14 +1,26 @@
+@import "poppins.scss";
+
 .wrapper {
   display:flex;
   width: 100%;
   align-items: stretch;
 }
 
+// Push side bar offscreen when inactive
+#sidebar {
+  margin-left: -250px;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+  background: #3b3b3b;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+// Show sidebar when active by removing negative margin
 #sidebar.active {
   margin-left: 0px;
 }
-
-@import "poppins.scss";
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -34,21 +46,13 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-#sidebar {
-    margin-left: -250px;
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 100vh;
-    background: #3b3b3b;
-    color: #fff;
-    transition: all 0.3s;
-}
-
+// CSS for search bar
 input.search {
   max-width: 200px;
   margin-left: 7px;
 }
 
+// CSS for search container
 #sidebar ul.search {
     max-width: 250px;
     padding: 20px 0;
@@ -60,15 +64,14 @@ input.search {
     padding: 10px;
 }
 
-
-
-.all-recipes, #sidebar ul li a.dropdown-toggle {
+.sidebar-link-color, #sidebar ul li a.dropdown-toggle {
     color: #fff;
     padding: 10px;
     font-size: 1.3em;
     display: block;
 }
-.all-recipes:hover, #sidebar ul li a:hover {
+
+.sidebar-link-color:hover, #sidebar ul li a:hover {
     color: #000000;
     background: #fff;
 }
@@ -111,6 +114,7 @@ ul.scroll-menu{
   box-shadow: none;
 }
 
+// Submenu links
 ul ul a {
     color: #fff;
     padding-bottom: 5px;

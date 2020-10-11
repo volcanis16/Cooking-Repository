@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :set_recipes_and_count, only: :index
   before_action :check_date, only: :index
+
+  # Redirect if user isn't an admin and attempts to access admin only pages.
   before_action :check_admin, except: [:show, :index, :update]
 
   # GET /recipes
@@ -25,7 +26,9 @@ class RecipesController < ApplicationController
   def edit
   end
 
+  # GET /recipes/index
   def showall
+    # Limit to 30 recipes/page
     @recipes = Recipe.all.order(:title).page(params[:page]).per(30)
     @recipe_count = @recipes.count
   end
@@ -98,7 +101,9 @@ class RecipesController < ApplicationController
     names = Category.pluck(:name)
     categories.each { |c| new_tags += ", #{c}" unless names.include?(c) }
 
+    # Remove comma at start of string
     new_tags.slice!(0..1) unless new_tags.blank?
+    
     respond_to do |format|
       format.json {render :json => {list: new_tags}, :status => 200 }
     end
@@ -110,11 +115,6 @@ class RecipesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])
-    end
-
-    def set_recipes_and_count
-      @recipes = Recipe.all
-      @recipe_count = @recipes.count
     end
 
     # Only allow a list of trusted parameters through.

@@ -3,7 +3,7 @@
 <div>
   <% @categories.each do |c| %>
     <div>
-      <p class='header'><%= link_to c.name.titleize, c, class: "index-link" %></p>
+      <p class='header'><%= link_to c.name.titleize, c, class: "dark-text" %></p>
       <% list = c.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
       <%= render "layouts/drag_list", list: list%>
     </div>

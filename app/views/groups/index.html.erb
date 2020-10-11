@@ -1,9 +1,15 @@
-<div><strong>Groups:</strong></div>
+<div class="main-header"><strong>Groups:</strong></div><br />
 
 <div class="row">
   <% @groups.each do |g| %>
     <div class="col-3">
-      <%= render "layouts/index_list", item: g %>
+      <div><%= render "layouts/index_list", item: g %></div>
+      <% if user_admin?%>
+        <div>
+          <%= link_to 'Edit', edit_group_path(g), class: "dark-text btn btn-light btn-sm mx-1" %>
+          <%= link_to 'Delete', g, data: { confirm: "Are you sure?" }, method: :delete, class: "dark-text btn btn-sm btn-light mr-1"  %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

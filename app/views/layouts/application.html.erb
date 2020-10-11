@@ -27,12 +27,12 @@
             </button>
 
             <% if user_admin? %>
-              <%= link_to 'New Recipe', new_recipe_path, class: 'index-link btn btn-light btn-sm mr-1' %>
+              <%= link_to 'New Recipe', new_recipe_path, class: 'dark-text btn btn-light btn-sm mr-1' %>
 
-              <%= link_to 'Options', edit_option_path(Option.find(1)), class: 'index-link btn btn-light btn-sm mr-1' %>
+              <%= link_to 'Options', edit_option_path(Option.find(1)), class: 'dark-text btn btn-light btn-sm mr-1' %>
             <% end %>
 
-            <%= link_to 'Logout', destroy_user_session_path, class: 'index-link btn btn-light btn-sm mr-auto', method: :delete %>
+            <%= link_to 'Logout', destroy_user_session_path, class: 'dark-text btn btn-light btn-sm mr-auto', method: :delete %>
 
             <strong><p class="header-text no-margin "><%= link_to "The Cooking Repository", root_path, class: 'header-text no-margin' %></p></strong>
           </nav>

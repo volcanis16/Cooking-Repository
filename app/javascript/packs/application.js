@@ -24,37 +24,38 @@ require("channels")
 
 $(document).on('turbolinks:load', function() {
 
-    //New Tags/Categories confirmation dialogue
-    $("input.submit.recipe").on('click', function(event) {
-      var catContents = $("input#categories").val();
-      var tagContents = $("input#tags").val();
+  //New Tags/Categories confirmation dialogue
+  $("input.submit.recipe").on('click', function(event) {
+    var catContents = $("input#categories").val();
+    var tagContents = $("input#tags").val();
 
-      jQuery.ajax({
-        url: "/check_tags.json", 
-        data: { 
-          tags: tagContents, 
-          categories: catContents 
-        },
-        type: "GET",
-        dataType: "json",
-        async: false
-        }) 
+    jQuery.ajax({
+      url: "/check_tags.json", 
+      data: { 
+        tags: tagContents, 
+        categories: catContents 
+      },
+      type: "GET",
+      dataType: "json",
+      async: false
+      }) 
 
-        .done(function( data ) {
-          console.log(data.list);
-          if(data.list == "")
-            return true;
-          if( confirm(`You are about to create new Tags and/or Categories. Please check the following list for any errors: ${data.list}`) ) 
-            return true;
-        })
+      .done(function( data ) {
+        console.log(data.list);
+        if(data.list == "")
+          return true;
+        if( confirm(`You are about to create new Tags and/or Categories. Please check the following list for any errors: ${data.list}`) ) 
+          return true;
+      })
 
-        .fail(function( xhr, status, errorThrown) {
-          alert( "Sorry, there was a problem!" );
-          console.log( "Error: " + errorThrown );
-          console.log( "Status: " + status );
-          console.dir( xhr );
-        })
-    })
+      .fail(function( xhr, status, errorThrown) {
+        alert( "Sorry, there was a problem!" );
+        console.log( "Error: " + errorThrown );
+        console.log( "Status: " + status );
+        console.dir( xhr );
+      })
+  })
+
   //Remove Ingredient
   $('form').on('click', '.remove_record', function(event) {
     $(this).prev('input[type=hidden').val('1');
@@ -133,10 +134,10 @@ $(document).on('turbolinks:load', function() {
     $("a.dropdown-toggle").closest("a").off('click');
   })
   
-    /**
+  /**
    * @fileoverview dragscroll - scroll area by dragging
    * @version 0.0.8
-   * 
+   *
    * @license MIT, see http://github.com/asvd/dragscroll
    * @copyright 2015 asvd <heliosframework@gmail.com> 
    */

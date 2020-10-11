@@ -1,4 +1,5 @@
 class OptionsController < ApplicationController
+  # Redirect if user isn't an admin and attempts to access admin only pages.
   before_action :check_admin, except: [:show]
 
   def show

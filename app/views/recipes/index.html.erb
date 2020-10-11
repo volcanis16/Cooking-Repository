@@ -1,3 +1,4 @@
+<!-- Home page -->
 <div class="ml-3">
   <h1>Recipes</h1>
 
@@ -13,7 +14,7 @@
     <div>
       <% random_category = Category.find(Option.find(1).random_category) %>
       <% list = random_category.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
-      <p class='header'><%= link_to "Random Category: #{random_category.name.titleize}", random_category, class: 'index-link' %></p>
+      <p class='header'><%= link_to "Random Category: #{random_category.name.titleize}", random_category, class: 'dark-text' %></p>
       <%= render "layouts/drag_list", list: list%>
     </div>
   <% end %>
@@ -21,7 +22,7 @@
   <% unless categories.blank? %>
     <% categories.each do |c| %>
       <div>
-        <p class='header'><%= link_to "#{c.name.titleize} Recipes:", c, class: 'index-link' %></p>
+        <p class='header'><%= link_to "#{c.name.titleize} Recipes:", c, class: 'dark-text' %></p>
         <% list = c.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
         <%= render "layouts/drag_list", list: list%>
       </div>
@@ -31,7 +32,7 @@
   <% unless tags.blank? %>
     <% tags.each do |t| %>
       <div>
-        <p class='header'><%= link_to "#{t.name.titleize} Recipes:", t, class: 'index-link' %></p>
+        <p class='header'><%= link_to "#{t.name.titleize} Recipes:", t, class: 'dark-text' %></p>
         <% list = t.recipes.order(Arel.sql('RANDOM()')).limit(20) %>
         <%= render "layouts/drag_list", list: list%>
       </div>

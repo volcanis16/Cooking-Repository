@@ -1,4 +1,5 @@
 class Tag < ApplicationRecord
+  ## FriendlyId allows user to use the name in place of the ID when entering urls
   extend FriendlyId
   friendly_id :name, use: :slugged
   validates :name, presence: true, uniqueness: true

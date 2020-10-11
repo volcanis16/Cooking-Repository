@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+
+  # Redirect if user isn't an admin and attempts to access admin only pages.
   before_action :check_admin, except: [:show, :index]
 
   def show
@@ -22,10 +24,10 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @par = group_params
-    @par[:tag_ids].reject!(&:blank?)
-    @par[:category_ids].reject!(&:blank?)
-    @group = Group.new(@par)
+    par = group_params
+    par[:tag_ids].reject!(&:blank?)
+    par[:category_ids].reject!(&:blank?)
+    @group = Group.new(par)
 
     respond_to do |format|
       if @group.save
