@@ -16,6 +16,9 @@
 # Ignore app yaml
 /app.yaml
 
+# Ignore CORS file
+/cors_setup.json
+
 # Ignore Key File
 /andrews-repository-4c959c16328a.json
 
